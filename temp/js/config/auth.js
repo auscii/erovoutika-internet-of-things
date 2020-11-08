@@ -3,6 +3,11 @@ var USER_ACTIVE = "";
 
 $("#user-active").val("");
 
+$("#user-account").click(function() {
+
+    $('#modal-login-account').modal('show');
+
+});
 
 $("#login_btn").click(function() {
 
@@ -26,3 +31,36 @@ $("#login_btn").click(function() {
     });
    
 });
+
+function user_account() {
+    var modal = document.getElementById("modal-login-account");
+    var btn = document.getElementById("user-account");
+
+    modal.style.display = "block";
+
+    console.log("modal-login-account");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

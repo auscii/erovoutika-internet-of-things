@@ -8,6 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="viewport" content = "width = device-width, initial-scale = 1, user-scalable = no" />
     <link href="css/freeboard.min.css" rel="stylesheet" />
+    <link href="css/bootstrap.css" rel="stylesheet" />
     <script src="js/freeboard.thirdparty.min.js"></script>
     <script type="text/javascript">
         head.js("js/freeboard_plugins.min.js",
@@ -67,7 +68,7 @@
             <div id="datasources">
                 <h2 class="title">Welcome, <p id="user-active"></p></h2>
 
-                 <span class="text-button table-operation" id="login-account" style="margin-left: -12px;">LOGIN ACCOUNT</span>
+                 <a class="text-button" id="user-account" onclick="user_account()" data-dismiss="modal" data-toggle="modal" aria-pressed="false" data-target="#modal-login-account" style="margin-left: -12px;">LOGIN ACCOUNT</a>
 
                 <!-- 
                     <div class="datasource-list-container">
@@ -122,6 +123,56 @@
 <div style="display:hidden">
     <ul data-bind="template: { name: 'pane-template', foreach: panes}">
     </ul>
+</div>
+
+<div class="modal fade" id="modal-login-account" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <div class="modal-title" style="font-weight: lighter;">
+                  <h4> <strong> Sign in your Account </strong> </h4> 
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login px-4 mx-auto mw-100">
+                    <form method="post">
+                        <div class="form-group">
+                            <label class="mb-2">Email address</label>
+                            <input type="email" class="form-control" id="ems_login_email_address" aria-describedby="emailHelp" placeholder="Enter your Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-2">Password</label>
+                            <input type="password" class="form-control" id="ems_login_password" placeholder="Enter your Password" required>
+                            <span title="Show/Hide Password" toggle="#ems_login_password" class="fa fa-fw fa-eye-slash field-icon toggle-password"></span>
+                        </div>
+                        <p class="text-left pb-2">
+                            <a href="#" data-dismiss="modal" data-toggle="modal" aria-pressed="false" data-target="#registerModalAccount" style="color: #000;"><i class="fa fa-user"></i> New user? Register here</a>
+                        </p> 
+                        <p class="text-left pb-2">
+                            <a href="#" data-dismiss="modal" data-toggle="modal" aria-pressed="false" data-target="#privacyPolicyModal" style="color: #000;"><i class="fa fa-lock"></i> Privacy Policy</a>
+                        </p>
+                        
+                        <center>
+                            <button type="button" name="login_btn" id="login_btn" data-dismiss="modal" class="btn btn-success submit mt-2"><i class="fa fa-check-circle"></i> Submit</button>
+                        </center> <br>
+                    </form>
+
+                    <center>
+                        <button type="button" id="registerGoogleAccount" onclick="LOGIN_GOOGLE_ACCOUNT()" class="btn btn-default">
+                             <img width="20px" alt="Google Login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"/>
+                             Login with Google Account
+                        </button> <br>
+                        <small>Note: For new users only.</small>
+                    </center>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="text/html" id="pane-template">
