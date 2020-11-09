@@ -10,12 +10,8 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
   <link rel="stylesheet" type="text/css" href="index/interface/css/style.css">
   <link rel="stylesheet" type="text/css" href="index/interface/css/main.css">
   <link rel="stylesheet" type="text/css" href="index/interface/css/bootstrap.css">
@@ -44,21 +40,13 @@
           <i class="far fa-user-circle"></i> Account
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
+            <i class="fas fa-user"></i> &nbsp;Profile
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
+            <i class="fas fa-lock"></i> &nbsp;Logout
           </a>
         </div>
       </li>
@@ -140,6 +128,8 @@
         <!-- Main row -->
         <div class="row">
 
+          <span id="pane-views"></span>
+
         </div>
         <!-- /.row (main row) -->
 
@@ -149,6 +139,7 @@
 
   </div>
   <!-- /.content-wrapper -->
+
   <footer class="main-footer">
     <strong>Copyright &copy; 2020-2021 <a href="#">ERovoutika Internet of Things</a>.</strong>
     All rights reserved.
@@ -157,32 +148,38 @@
     </div>
   </footer>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+  <!-- Modals -->
+  <div class="modal fade" id="modal-pane" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <div class="modal-title modal-header-title">
+                    <h4>Do you wish to add new pane?</h4> 
+                  </div>
+              </div>
+              <div class="modal-body text-center">
+                  <button type="button" id="btn-submit-pane" class="btn btn-success text-center"><i class="fa fa-check-circle"></i> Yes</button>&nbsp;
+                  <button type="button" data-dismiss="modal" class="btn btn-danger text-center"><i class="fa fa-times-circle"></i> No</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
 </div>
 <!-- ./wrapper -->
 
 <!-- scripts -->
 
-<!-- 
+<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
 <script src="plugins/jquery/jquery.min.js"></script>
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script> 
--->
-<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
-<script src="index/config/js/jquery/jquery-2.2.3.min.js"></script>
 <script src="index/config/js/bootstrap/bootstrap.js"></script>
 <script src="index/config/js/index/default.js"></script>
 <script src="index/config/js/common/main.js"></script>
 <script src="index/config/js/index/main.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<script src="plugins/summernote/summernote-bs4.min.js"></script>
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="dist/js/adminlte.js"></script>
-<script src="dist/js/pages/dashboard.js"></script>
 <script src="dist/js/demo.js"></script>
 
 </body>
