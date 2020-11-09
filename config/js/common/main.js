@@ -1,5 +1,5 @@
-var firebaseConfig = {
-    apiKey: "AIzaSyDKszM64g46_MoNmqhMQT-hyH1n-yHdmyY",
+var config = {
+	apiKey: "AIzaSyDKszM64g46_MoNmqhMQT-hyH1n-yHdmyY",
     authDomain: "erovoutika-internet-of-things.firebaseapp.com",
     databaseURL: "https://erovoutika-internet-of-things.firebaseio.com",
     projectId: "erovoutika-internet-of-things",
@@ -8,7 +8,5 @@ var firebaseConfig = {
     appId: "1:420446257049:web:54412d73fad71e04f45d08",
     measurementId: "G-QBD41S27HZ"
 };
-
-firebase.initializeApp(firebaseConfig);
-
+firebase.initializeApp(config);
 var database = firebase.database();

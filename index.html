@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ERovoutika Internet of Things</title>
+  <link rel="stylesheet" type="text/css" href="interface/css/style.css">
+  <link rel="stylesheet" type="text/css" href="interface/css/main.css">
+  <link rel="stylesheet" type="text/css" href="interface/css/bootstrap.css">
+  <!-- <link rel="stylesheet" type="text/css" href="interface/css/fontawesome-all.css"> -->
+</head>
+<body>
+
+  <a href="#" class="btn btn-success" id="btn-add-pane">ADD PANE</a>
+
+<!-- 
+<figure class="snip1336">
+  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample87.jpg" alt="sample87" />
+  <figcaption>
+    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample4.jpg" alt="profile-sample4" class="profile" />
+    <h2>Hans Down<span>Engineer</span></h2>
+    <p>I'm looking for something that can deliver a 50-pound payload of snow on a small feminine target. Can you suggest something? Hello...? </p>
+    <a href="#" class="follow">Follow</a>
+    <a href="#" class="info">More Info</a>
+  </figcaption>
+</figure>
+
+<figure class="snip1336 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample74.jpg" alt="sample74" />
+  <figcaption>
+    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample2.jpg" alt="profile-sample2" class="profile" />
+    <h2>Wisteria Widget<span>Photographer</span></h2>
+    <p>Calvin: I'm a genius, but I'm a misunderstood genius. Hobbes: What's misunderstood about you? Calvin: Nobody thinks I'm a genius.</p>
+    <a href="#" class="follow">Follow</a>
+    <a href="#" class="info">More Info</a>
+  </figcaption>
+</figure>
+
+<figure class="snip1336"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample69.jpg" alt="sample69" />
+  <figcaption>
+    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample5.jpg" alt="profile-sample5" class="profile" />
+    <h2>Desmond Eagle<span>Accountant</span></h2>
+    <p>If you want to stay dad you've got to polish your image. I think the image we need to create for you is "repentant but learning".</p>
+    <a href="#" class="follow">Follow</a>
+    <a href="#" class="info">More Info</a>
+  </figcaption>
+</figure>
+-->
+
+<!-- Modals -->
+<div class="modal fade" id="modal-pane" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title modal-header-title">
+                  <h4>Do you wish to add new pane?</h4> 
+                </div>
+            </div>
+            <div class="modal-body text-center">
+                <button type="button" id="btn-submit-pane" class="btn btn-success text-center"><i class="fa fa-check-circle"></i> Yes</button>&nbsp;
+                <button type="button" data-dismiss="modal" class="btn btn-danger text-center"><i class="fa fa-times-circle"></i> No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="modal fade" id="modal-pane" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header text-center">
+                <div class="modal-title" style="font-weight: lighter;">
+                  <h4> <strong> ADD PANE </strong> </h4> 
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="login px-4 mx-auto mw-100">
+                    <form method="post">
+                        <div class="form-group">
+                            <label class="mb-2">Email address</label>
+                            <input type="email" class="form-control" id="ems_login_email_address" aria-describedby="emailHelp" placeholder="Enter your Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-2">Password</label>
+                            <input type="password" class="form-control" id="ems_login_password" placeholder="Enter your Password" required>
+                            <span title="Show/Hide Password" toggle="#ems_login_password" class="fa fa-fw fa-eye-slash field-icon toggle-password"></span>
+                        </div>
+                        <p class="text-left pb-2">
+                            <a href="#" data-dismiss="modal" data-toggle="modal" aria-pressed="false" data-target="#registerModalAccount" style="color: #000;"><i class="fa fa-user"></i> New user? Register here</a>
+                        </p> 
+                        <p class="text-left pb-2">
+                            <a href="#" data-dismiss="modal" data-toggle="modal" aria-pressed="false" data-target="#privacyPolicyModal" style="color: #000;"><i class="fa fa-lock"></i> Privacy Policy</a>
+                        </p>
+                        
+                        <center>
+                            <button type="button" name="login_btn" id="login_btn" data-dismiss="modal" class="btn btn-success submit mt-2"><i class="fa fa-check-circle"></i> Submit</button>
+                        </center> <br>
+                    </form>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+<script src="config/js/jquery/jquery-2.2.3.min.js"></script>
+<script src="config/js/bootstrap/bootstrap.js"></script>
+<script src="config/js/index/default.js"></script>
+<script src="config/js/common/main.js"></script>
+<script src="config/js/index/main.js"></script>
+
+</body>
+</html>

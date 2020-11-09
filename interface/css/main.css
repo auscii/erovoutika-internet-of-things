@@ -1,0 +1,18 @@
+html {
+  height: 100%;
+}
+
+body {
+  background-color: #212121;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap;
+  margin: 0;
+  height: 100%;
+}
+
+.modal-header-title {
+	font-weight: lighter; 
+	margin: 0 auto;
+}
