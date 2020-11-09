@@ -30,10 +30,12 @@ $("#btn-login-submit").click(function() {
 		         localStorage.setItem('user_position', userPosition);
 		         localStorage.setItem('user_email_address', userEmailAddress);
 		         localStorage.setItem('p', p);
-		         localStorage.setItem('user_status', userStatus);
+             localStorage.setItem('user_status', userStatus);
+             localStorage.setItem('user_date_registered', fullDate);
+		         localStorage.setItem('user_time_registered', time);
 
 		         database.ref('Users/Log/' + userLogCode).set({
-					user_id: userId,
+					    user_id: userId,
 			      	user_full_name: userFullName,
 			      	user_icon_url: userIconUrl,
 			      	user_position: userPosition,
@@ -124,4 +126,11 @@ function AUTH_GOOGLE_ACCOUNT() {
 
     }); 
 	*/
+}
+
+function USER_LOG_OUT() {
+  console.log("user_log_out");
+  localStorage.clear();
+  firebase.auth().signOut();
+  window.location.href="index.html";
 }

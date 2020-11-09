@@ -1,7 +1,12 @@
 //auth users
-var currentUsername = "";
-var currentUserEmailAddress ="";
-var currentUserId = "";
+var currentUserEmailAddress = localStorage.getItem('user_email_address');
+var currentUserId = localStorage.getItem('user_id');
+var currentUserFullname = localStorage.getItem('user_full_name');
+var currentUserProfilePicture = localStorage.getItem('user_icon_url');
+var currentUserPosition = localStorage.getItem('user_position');
+var currentUserStatus = localStorage.getItem('user_status');
+var currentUserDateRegistered = localStorage.getItem('user_date_registered');
+var currentUserTimeRegistered = localStorage.getItem('user_time_registered');
 
 //fb provider
 var provider = new firebase.auth.GoogleAuthProvider();   
@@ -50,26 +55,40 @@ $("#btn-submit-pane").click(function() {
 });
 
 //fetch pane views
-FETCH_PANES();
+DASBOARD_VIEWS();
 
-function FETCH_PANES() {
-	panesRef.orderByChild("user_id").on("child_added", function(snapshot) {
-		var id = snapshot.val().user_id;
-		var fullName = snapshot.val().user_full_name;
-		var iconUrl = snapshot.val().user_icon_url;
-		var position = snapshot.val().user_position;
-		var emailAddress = snapshot.val().user_email_address;
-		var password = snapshot.val().user_password;
-		var status = snapshot.val().user_status;
-		var paneId = snapshot.val().pane_view_id;
-		var paneBgUrl = snapshot.val().pane_view_background_url;
-		var panePrimaryTitle = snapshot.val().pane_view_primary_title;
-		var panelLabelCaption = snapshot.val().pane_view_label_caption;
-		var paneButtonValue = snapshot.val().paneButtonValue;
-		var paneSortOrder = snapshot.val().pane_view_sort_order;
+function DASBOARD_VIEWS() {
+	if (!currentUserId) {
+		window.location.href="index.html";
+	} else {
+		panesRef.orderByChild("user_id").on("child_added", function(snapshot) {
+			var id = snapshot.val().user_id;
+			var fullName = snapshot.val().user_full_name;
+			var iconUrl = snapshot.val().user_icon_url;
+			var position = snapshot.val().user_position;
+			var emailAddress = snapshot.val().user_email_address;
+			var password = snapshot.val().user_password;
+			var status = snapshot.val().user_status;
+			var paneId = snapshot.val().pane_view_id;
+			var paneBgUrl = snapshot.val().pane_view_background_url;
+			var panePrimaryTitle = snapshot.val().pane_view_primary_title;
+			var panelLabelCaption = snapshot.val().pane_view_label_caption;
+			var paneButtonValue = snapshot.val().paneButtonValue;
+			var paneSortOrder = snapshot.val().pane_view_sort_order;
 
-		$("#pane-views").append('<figure class="snip1336" id="pane-views"><figcaption id="pane-views"><h2>'+panePrimaryTitle+'</h2><p>'+panelLabelCaption+'</p><a href="#" class="follow">'+paneButtonValue+'</a></figcaption></figure>');
-	});
+			if (id) {
+				$('#spinner').css({"display":"none"});
+				$("#pane-views").append('<figure class="snip1336" id="pane-views"><figcaption id="pane-views"><h2>'+panePrimaryTitle+'</h2><p>'+panelLabelCaption+'</p><a href="#" class="follow">'+paneButtonValue+'</a></figcaption></figure>');
+			}
+
+			// if (localStorage.getItem("username") === null) {
+
+			//set user details
+			$("#user-img").attr("src", currentUserProfilePicture);
+			$('#user-fullname').html(currentUserFullname);
+
+		});
+	}
 }
 
 //pane views effects

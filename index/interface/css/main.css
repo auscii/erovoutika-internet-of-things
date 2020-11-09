@@ -2,3 +2,9 @@
 	font-weight: lighter; 
 	margin: 0 auto;
 }
+
+.spinner {
+	width: 120px; 
+	height: 120px; 
+	margin: 0 auto;
+}
