@@ -1,67 +1,7 @@
 var usersRef = firebase.database().ref("Users/");
 
 $("#btn-login-submit").click(function() {
-	var userLoginEmailAddress = $("#user-email-address").val();
-	var userLoginPassword = $("#user-password").val();
-
-	$('#modal-progress').modal('show');
-	$('#loading-message').html('Getting user details...');
-
-	firebase.auth().signInWithEmailAndPassword(userLoginEmailAddress, 
-											   userLoginPassword).then(function(firebaseUser) {
-		firebase.auth().onAuthStateChanged((user) => {
-			if (user != null) {
-		      var user = firebase.auth().currentUser;
-		      usersRef.orderByChild("user_email_address")
-		              .equalTo(userLoginEmailAddress)
-		              .on("child_added",
-		      function(data) {
-		         var userId = data.val().user_id;
-		         var userFullName = data.val().user_full_name;
-		         var userIconUrl = data.val().user_icon_url;
-		         var userPosition = data.val().user_position;
-		         var userEmailAddress = data.val().user_email_address;
-		         var p = data.val().user_password;
-		         var userStatus = data.val().user_status;
-
-		         localStorage.setItem('user_id', userId);
-		         localStorage.setItem('user_full_name', userFullName);
-		         localStorage.setItem('user_icon_url', userIconUrl);
-		         localStorage.setItem('user_position', userPosition);
-		         localStorage.setItem('user_email_address', userEmailAddress);
-		         localStorage.setItem('p', p);
-             localStorage.setItem('user_status', userStatus);
-             localStorage.setItem('user_date_registered', fullDate);
-		         localStorage.setItem('user_time_registered', time);
-
-		         database.ref('Users/Log/' + userLogCode).set({
-					    user_id: userId,
-			      	user_full_name: userFullName,
-			      	user_icon_url: userIconUrl,
-			      	user_position: userPosition,
-			      	user_email_address: userEmailAddress,
-			      	user_password: p,
-			      	user_status: 0,
-			      	user_date_logged_in_date: fullDate,
-			      	user_date_logged_in_time: time
-		         });
-
-	             window.location.href='main.html';
-		      });
-		    } else {
-		  		$('#modal-progress').modal('hide');
-		  		$('#modal-login-error').modal('show');
-		  		$('#error-message').html('User Not Found!');
-		  }
-		});
-    })
-    .catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-  		$('#modal-progress').modal('hide');
-  		$('#modal-login-error').modal('show');
-  		$('#error-message').html("Error: " + errorMessage);
-    });
+	 AUTH_USER_ACCOUNT();
 });
 
 $("#btn-login-google").click(function() {
@@ -134,3 +74,82 @@ function USER_LOG_OUT() {
   firebase.auth().signOut();
   window.location.href="index.html";
 }
+
+function AUTH_USER_ACCOUNT() {
+    var userLoginEmailAddress = $("#user-email-address").val();
+    var userLoginPassword = $("#user-password").val();
+
+    $('#modal-progress').modal('show');
+    $('#loading-message').html('Getting user details...');
+
+    if (userLoginEmailAddress == "") {
+        $('#modal-progress').modal('hide');
+        $('#modal-login-error').modal('show');
+        $('#error-message').html("User not found!");
+        console.log("userLoginEmailAddress is empty");
+        return;
+    }
+
+    firebase.auth().signInWithEmailAndPassword(userLoginEmailAddress, userLoginPassword).then(function(firebaseUser) {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user != null) {
+            var user = firebase.auth().currentUser;
+            usersRef.orderByChild("user_email_address")
+                    .equalTo(userLoginEmailAddress)
+                    .on("child_added",
+            function(data) {
+               var userId = data.val().user_id;
+               var userFullName = data.val().user_full_name;
+               var userIconUrl = data.val().user_icon_url;
+               var userPosition = data.val().user_position;
+               var userEmailAddress = data.val().user_email_address;
+               var p = data.val().user_password;
+               var userStatus = data.val().user_status;
+
+               localStorage.setItem('user_id', userId);
+               localStorage.setItem('user_full_name', userFullName);
+               localStorage.setItem('user_icon_url', userIconUrl);
+               localStorage.setItem('user_position', userPosition);
+               localStorage.setItem('user_email_address', userEmailAddress);
+               localStorage.setItem('p', p);
+               localStorage.setItem('user_status', userStatus);
+               localStorage.setItem('user_date_registered', fullDate);
+               localStorage.setItem('user_time_registered', time);
+
+               database.ref('Users/Log/' + userLogCode).set({
+                user_id: userId,
+                user_full_name: userFullName,
+                user_icon_url: userIconUrl,
+                user_position: userPosition,
+                user_email_address: userEmailAddress,
+                user_password: p,
+                user_status: 0,
+                user_date_logged_in_date: fullDate,
+                user_date_logged_in_time: time
+               });
+
+                 window.location.href='main.html';
+            });
+          } else {
+            $('#modal-progress').modal('hide');
+            $('#modal-login-error').modal('show');
+            $('#error-message').html('User Not Found!');
+        }
+      });
+      }).catch(function(error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          $('#modal-progress').modal('hide');
+          $('#modal-login-error').modal('show');
+          $('#error-message').html("Error: " + errorMessage);
+      });
+}
+
+//send form if they hit enter (bugs: when entering no value of user/pass input field, still showing/displaying progress modal)
+// document.onkeypress = enter;
+// function enter(e) {
+//    if (e.which == 13) { 
+//       $('#modal-progress').modal('hide');
+//       AUTH_USER_ACCOUNT();
+//    }
+// }

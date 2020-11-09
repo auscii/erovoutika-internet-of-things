@@ -76,7 +76,7 @@ function DASBOARD_VIEWS() {
 
 			if (id) {
 				$('#spinner').css({"display":"none"});
-				$("#pane-views").append('<figure class="snip1336" id="pane-views"><figcaption id="pane-views"><h2>'+panePrimaryTitle+'</h2><p>'+panelLabelCaption+'</p><a href="#" class="follow">'+paneButtonValue+'</a></figcaption></figure>');
+				$("#pane-views").append('<figure class="snip1336"><figcaption><div class="card-tools" style="margin-left: -15px;"><button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button></div> <br><h2>'+panePrimaryTitle+'</h2><p>'+panelLabelCaption+'</p><a href="#" class="follow">'+paneButtonValue+'</a></figcaption></figure>');
 			}
 
 			//set user details
