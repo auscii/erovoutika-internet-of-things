@@ -15,13 +15,23 @@ var provider = new firebase.auth.GoogleAuthProvider();
 var panesViews = "Pane/Views/";
 var panesRef = firebase.database().ref(panesViews);
 
+//total preferences
+var totalPanes = setInterval(function() {
+	panesRef.once("value").then(function(snapshot) {
+	    console.log("total snapshot =>", snapshot.numChildren()); 
+	    totalPanes = snapshot.numChildren();
+	});
+}, 1000);
+
 //button listeners
 $("#btn-add-pane").click(function() {
     $('#modal-pane').modal('show');
 });
 
 $("#btn-submit-pane").click(function() {
-    database.ref(panesViews + viewCode).set({
+	console.log("btn-submit-pane");
+
+    database.ref(panesViews + viewCode + totalPanes).set({
       user_id: 1,
       user_full_name: "fullName",
       user_icon_url: "",
@@ -29,7 +39,7 @@ $("#btn-submit-pane").click(function() {
       user_email_address: "emailAddress",
       user_password: "NULL",
       user_status: 0,
-      pane_view_id: viewCode,
+      pane_view_id: viewCode + totalPanes,
       pane_view_background_url: "",
       pane_view_primary_title: "Binary rejected",
       pane_view_label_caption: "snow on a small feminine target that can deliver, Lorem ipsum dolor.",
@@ -37,21 +47,9 @@ $("#btn-submit-pane").click(function() {
       pane_view_sort_order: 0
     });
 
-    /* for creating user
-    database.ref('Users/' + userCode).set({
-		user_id: userCode,
-      	user_full_name: "Juan dela cruz",
-      	user_icon_url: "https://toppng.com//public/uploads/preview/login-icons-user-flat-icon-115534363917nmr24mjcm.png",
-      	user_position: "Admin",
-      	user_email_address: "juan@gmail.com",
-      	user_password: "juan",
-      	user_status: 1,
-      	user_date_logged_in_date: fullDate,
-      	user_date_logged_in_time: time
-     });
-    */
+    $("#modal-pane").modal("hide");
 
-    RELOAD_PAGE();
+    //RELOAD_PAGE();
 });
 
 //fetch pane views
@@ -81,8 +79,6 @@ function DASBOARD_VIEWS() {
 				$("#pane-views").append('<figure class="snip1336" id="pane-views"><figcaption id="pane-views"><h2>'+panePrimaryTitle+'</h2><p>'+panelLabelCaption+'</p><a href="#" class="follow">'+paneButtonValue+'</a></figcaption></figure>');
 			}
 
-			// if (localStorage.getItem("username") === null) {
-
 			//set user details
 			$("#user-img").attr("src", currentUserProfilePicture);
 			$('#user-fullname').html(currentUserFullname);
@@ -97,3 +93,17 @@ $(".hover").mouseleave(
 		$(this).removeClass("hover");
 	}
 );
+
+/* for creating user
+database.ref('Users/' + userCode).set({
+	user_id: userCode,
+	user_full_name: "Juan dela cruz",
+	user_icon_url: "https://toppng.com//public/uploads/preview/login-icons-user-flat-icon-115534363917nmr24mjcm.png",
+	user_position: "Admin",
+	user_email_address: "juan@gmail.com",
+	user_password: "juan",
+	user_status: 1,
+	user_date_logged_in_date: fullDate,
+	user_date_logged_in_time: time
+});
+*/
