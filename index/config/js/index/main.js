@@ -7,7 +7,7 @@ var currentUserId = "";
 var provider = new firebase.auth.GoogleAuthProvider();   
 
 //fb references
-var panesViews = "Pane/Views/"
+var panesViews = "Pane/Views/";
 var panesRef = firebase.database().ref(panesViews);
 
 //button listeners
@@ -31,6 +31,20 @@ $("#btn-submit-pane").click(function() {
       paneButtonValue: "Learn more",
       pane_view_sort_order: 0
     });
+
+    /* for creating user
+    database.ref('Users/' + userCode).set({
+		user_id: userCode,
+      	user_full_name: "Juan dela cruz",
+      	user_icon_url: "https://toppng.com//public/uploads/preview/login-icons-user-flat-icon-115534363917nmr24mjcm.png",
+      	user_position: "Admin",
+      	user_email_address: "juan@gmail.com",
+      	user_password: "juan",
+      	user_status: 1,
+      	user_date_logged_in_date: fullDate,
+      	user_date_logged_in_time: time
+     });
+    */
 
     RELOAD_PAGE();
 });

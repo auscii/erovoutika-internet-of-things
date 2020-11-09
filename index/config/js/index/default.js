@@ -5,8 +5,9 @@ var mm = String(date.getMonth() + 1).padStart(2, '0');
 var yyyy = date.getFullYear();
 var fullDate = mm+dd+yyyy;
 var fullCurrentDateTime = yyyy + '-' + mm + '-' + dd + ' ' + Date().slice(16,25);
-date = yyyy + '-' + mm + '-' + dd;
 var viewCode = "VW" + KEY_CODE(3) + fullDate + time;
+var userCode = "USER" + KEY_CODE(3) + fullDate + time;
+var userLogCode = "USERLOG" + KEY_CODE(3) + fullDate + time;
 
 function KEY_CODE(len, charSet) {
     charSet = charSet || 'ABCDFGHIJKLMNOPQRSTUVWXYZ'+'0123456789';
