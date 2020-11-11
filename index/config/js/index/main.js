@@ -1,6 +1,7 @@
 //auth users
 var currentUserEmailAddress = localStorage.getItem('user_email_address');
 var currentUserId = localStorage.getItem('user_id');
+var currentUser_key = localStorage.getItem('user_key');
 var currentUserFullname = localStorage.getItem('user_full_name');
 var currentUserProfilePicture = localStorage.getItem('user_icon_url');
 var currentUserPosition = localStorage.getItem('user_position');
@@ -94,8 +95,9 @@ $(".hover").mouseleave(
 	}
 );
 
-/* for creating user
-database.ref('Users/' + userCode).set({
+//for creating temp user
+database.ref('Users/' + "juangmailcom").set({
+	user_key: "juangmailcom",
 	user_id: userCode,
 	user_full_name: "Juan dela cruz",
 	user_icon_url: "https://toppng.com//public/uploads/preview/login-icons-user-flat-icon-115534363917nmr24mjcm.png",
@@ -106,4 +108,3 @@ database.ref('Users/' + userCode).set({
 	user_date_logged_in_date: fullDate,
 	user_date_logged_in_time: time
 });
-*/

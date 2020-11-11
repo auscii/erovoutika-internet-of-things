@@ -94,11 +94,11 @@ function AUTH_USER_ACCOUNT() {
       firebase.auth().onAuthStateChanged((user) => {
         if (user != null) {
             var user = firebase.auth().currentUser;
-            usersRef.orderByChild("user_email_address")
-                    .equalTo(userLoginEmailAddress)
+            usersRef.orderByChild("user_key")
                     .on("child_added",
             function(data) {
                var userId = data.val().user_id;
+               var userKey = data.val().user_key;
                var userFullName = data.val().user_full_name;
                var userIconUrl = data.val().user_icon_url;
                var userPosition = data.val().user_position;
@@ -107,6 +107,7 @@ function AUTH_USER_ACCOUNT() {
                var userStatus = data.val().user_status;
 
                localStorage.setItem('user_id', userId);
+               localStorage.setItem('user_key', userKey);
                localStorage.setItem('user_full_name', userFullName);
                localStorage.setItem('user_icon_url', userIconUrl);
                localStorage.setItem('user_position', userPosition);
