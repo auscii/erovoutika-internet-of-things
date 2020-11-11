@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ERovoutika Internet of Things | Register</title>
+  <!-- Tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="interface/css/main.css">
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+
+<body class="hold-transition register-page">
+<div class="register-box">
+  <div class="register-logo">
+    <a href="../index.html"><b>Erovoutika</b><br>Internet of things</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body register-card-body">
+
+      <div class="row m-bottom-20">
+        <div class="col-8">
+           <button class="btn btn-sm btn-default" id="btn-register-back"><i class="fa fa-arrow-left"></i> &nbsp;Go back</button>
+        </div>
+      </div>
+
+      <p class="login-box-msg">Register new account</p>
+
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" id="register-email-address" placeholder="Email Address">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" id="register-password" placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" id="register-re-password" placeholder="Retype password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="register-fullname" placeholder="Full name">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <textarea class="form-control remove-resize" rows="3" id="register-address" placeholder="Complete Address"></textarea>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-address-card"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" id="register-contact-number" placeholder="Contact Number">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-address-book"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="register-occupation" placeholder="Occupation">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-briefcase"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="icheck-primary">
+              <input type="checkbox" id="register-agree-terms" value="agree">
+              <label for="register-agree-terms">
+               I agree to the <a href="#">terms and condition</a>
+              </label>
+            </div>
+          </div><!-- /.col -->
+        </div>
+
+        <div class="row">
+          <div class="col-7 center m-top-10">
+            <button type="submit" class="btn btn-success btn-block" id="btn-register-submit"><i class="fa fa-check-circle"></i> Register Account</button>
+          </div><!-- /.col -->
+        </div>
+
+    </div>
+
+  </div><!-- /.card -->
+</div><!-- /.register-box -->
+
+<!-- Modals -->
+<div class="modal fade" id="modal-register" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                  <h4 id="modal-register-message"> </h4> 
+                </div>
+            </div>
+            <div class="modal-body text-right">
+                <button type="button" data-dismiss="modal" class="btn btn-default text-center text-white" id="modal-register-btn">
+                  <i class="fa fa-times-circle"></i> 
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+<script src="../plugins/jquery/jquery.min.js"></script>
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../dist/js/adminlte.min.js"></script>
+<script src="config/js/common/main.js"></script>
+<script src="config/js/index/default.js"></script>
+<script src="config/js/index/auth.js"></script>
+
+</body>
+</html>

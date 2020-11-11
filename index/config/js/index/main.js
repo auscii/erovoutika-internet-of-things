@@ -1,30 +1,15 @@
-//auth users
-var currentUserEmailAddress = localStorage.getItem('user_email_address');
-var currentUserId = localStorage.getItem('user_id');
-var currentUser_key = localStorage.getItem('user_key');
-var currentUserFullname = localStorage.getItem('user_full_name');
-var currentUserProfilePicture = localStorage.getItem('user_icon_url');
-var currentUserPosition = localStorage.getItem('user_position');
-var currentUserStatus = localStorage.getItem('user_status');
-var currentUserDateRegistered = localStorage.getItem('user_date_registered');
-var currentUserTimeRegistered = localStorage.getItem('user_time_registered');
-
-//fb provider
-var provider = new firebase.auth.GoogleAuthProvider();   
-
-//fb references
-var panesViews = "Pane/Views/";
-var panesRef = firebase.database().ref(panesViews);
+//fb preference
+// var panesViews = "Pane/Views/";
+// var panesRef = firebase.database().ref(panesViews);
 
 //total preferences
 var totalPanes = setInterval(function() {
 	panesRef.once("value").then(function(snapshot) {
-	    console.log("total snapshot =>", snapshot.numChildren()); 
 	    totalPanes = snapshot.numChildren();
 	});
 }, 1000);
 
-//button listeners
+//listeners
 $("#btn-add-pane").click(function() {
     $('#modal-pane').modal('show');
 });
@@ -32,6 +17,7 @@ $("#btn-add-pane").click(function() {
 $("#btn-submit-pane").click(function() {
 	console.log("btn-submit-pane");
 
+	//MODIFY THIS - CHAMGE TO USER PREFERENCE AND ADD SUB-TREE "VIEWS"
     database.ref(panesViews + viewCode + totalPanes).set({
       user_id: 1,
       user_full_name: "fullName",
@@ -49,7 +35,6 @@ $("#btn-submit-pane").click(function() {
     });
 
     $("#modal-pane").modal("hide");
-
     //RELOAD_PAGE();
 });
 
@@ -58,7 +43,7 @@ DASBOARD_VIEWS();
 
 function DASBOARD_VIEWS() {
 	if (!currentUserId) {
-		window.location.href="index.html";
+		window.location.href="../index.html";
 	} else {
 		panesRef.orderByChild("user_id").on("child_added", function(snapshot) {
 			var id = snapshot.val().user_id;
@@ -96,15 +81,18 @@ $(".hover").mouseleave(
 );
 
 //for creating temp user
+/*
 database.ref('Users/' + "juangmailcom").set({
 	user_key: "juangmailcom",
 	user_id: userCode,
 	user_full_name: "Juan dela cruz",
-	user_icon_url: "https://toppng.com//public/uploads/preview/login-icons-user-flat-icon-115534363917nmr24mjcm.png",
-	user_position: "Admin",
+	user_icon_url: freeUserImage,
+	user_position: admin,
 	user_email_address: "juan@gmail.com",
+	user_contact_number: "09205530103",
 	user_password: "juan",
 	user_status: 1,
 	user_date_logged_in_date: fullDate,
 	user_date_logged_in_time: time
 });
+*/

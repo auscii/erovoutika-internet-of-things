@@ -12,3 +12,24 @@
 .sidebar-title {
 	font-size: 19px;
 }
+
+.remove-resize {
+	resize: none;
+}
+
+.center {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.m-top-10 {
+	margin-top: 10px;
+}
+
+.m-bottom-20 {
+	margin-bottom: 20px;
+}
+
+.text-white {
+	color: #fff;
+}
