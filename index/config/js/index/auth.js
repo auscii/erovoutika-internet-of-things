@@ -4,8 +4,8 @@ $("#btn-login-submit").click(function() {
 });
 
 $("#btn-login-google").click(function() {
+  $('#modal-not-available').modal('show');
 	//LOGIN_GOOGLE_ACCOUNT();
-	$('#modal-not-available').modal('show');
 });
 
 $("#btn-login-register").click(function() {
@@ -20,64 +20,64 @@ $("#btn-register-submit").click(function() {
   NEW_ACCOUNT();
 });
 
+$("#btn-login-reset").click(function() {
+  $('#modal-not-available').modal('show');
+});
+
 //methods
 function LOGIN_GOOGLE_ACCOUNT() {
     firebase.auth().signInWithPopup(provider).then(function(result) {
       var token = result.credential.accessToken;
       var user = result.user;
-
+      console.log("-> token =>", token);
+      console.log("-> user =>", user);
       AUTH_GOOGLE_ACCOUNT();
-
     }).catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
         var email = error.email;
         var credential = error.credential;
-
         console.log(error);
         alert(error);
     });
 }
 
 function AUTH_GOOGLE_ACCOUNT() {
-	/*
     firebase.auth().onAuthStateChanged((user) => {
       var user = firebase.auth().currentUser;
-      var userId = user.uid;
-      var emailAddress = user.email;
-      var fullName = user.displayName;
-      var profilePicture = user.photoURL;
-      var position = "PO";
-      var registeredDate = new Date().toLocaleDateString();
-      var registeredTime = new Date().toLocaleTimeString();
-      var actionStatus_a = 'ADD';
-      var actionType = 'New User - ' + fullName;
+      var googleUserId = user.uid;
+      var googleUserEmailAddress = user.email;
+      var googleUserFullName = user.displayName;
+      var googleUserProfilePicture = user.photoURL;
 
-      firebase.auth().sendPasswordResetEmail(emailAddress);
+      firebase.auth().sendPasswordResetEmail(googleUserEmailAddress);
 
-      $('#btn_complete_google_sign_in').click(function()
-      {
-          var userAddress = $('#compgoosign_address').val();
-          var userBdate = $('#compgoosign_bdate').val();
+      $('#modal-google-completion-registration').modal('show');
 
-          database.ref('Users/' + userId).set(
-          {
-              userid: userId,
-              emailad: emailAddress,
-              name: fullName,
-              profilepicture: profilePicture,
-              position: position,
-              password: 'NULL',
-              dateregistered: registeredDate,
-              timeregistered: registeredTime,
-              address: userAddress,
-              birthdate: userBdate,
-              approvalstatus: 'NULL'
+      $('#btn_complete_google_sign_in').click(function() {
+          var googleUserAddress = $("#register-address").val().trim();
+          var googleUserContactNumber = $("#register-contact-number").val().trim();
+          var googleUserOccupation = $("#register-occupation").val().trim();
+          var googleUserKey = googleUserEmailAddress.replace(/[^a-zA-Z ]/g,'').trim();
+
+          database.ref('Users/' + googleUserKey).set({
+              user_key: googleUserKey,
+              user_id: googleUserId,
+              user_full_name: googleUserFullName,
+              user_icon_url: googleUserProfilePicture,
+              user_position: member,
+              user_email_address: googleUserEmailAddress,
+              user_contact_number: googleUserContactNumber,
+              user_occupation: googleUserOccupation,
+              user_address: googleUserAddress,
+              user_password: "NULL",
+              user_status: 1,
+              user_date_logged_in_date: currentDate,
+              user_date_logged_in_time: currentTime
           });
       });
 
     }); 
-	*/
 }
 
 function USER_LOG_OUT() {
@@ -170,9 +170,10 @@ function NEW_ACCOUNT() {
       $('#modal-register-message').html('Please fill-up all input fields!');
   } else {
       firebase.auth().createUserWithEmailAndPassword(registerEmailAddress, registerPassword).then(function(user) {
+          var user = firebase.auth().currentUser;
           database.ref('Users/' + registerUserKey).set({
               user_key: registerUserKey,
-              user_id: userCode,
+              user_id: user.uid,
               user_full_name: registerFullname,
               user_icon_url: freeUserImage,
               user_position: member,
@@ -188,7 +189,7 @@ function NEW_ACCOUNT() {
           $('#modal-register').modal('show');
           $('#modal-register-message').html('Successfully register new account!');
           $('#modal-register-btn').html('OK');
-          $('#modal-register-btn').css({"background-color":"#34eb7a"});
+          $('#modal-register-btn').css({"background-color":"#008a07"});
           $("#modal-register-btn").click(function() {
             window.location.href="../index.html";
           });

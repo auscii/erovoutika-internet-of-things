@@ -11,7 +11,6 @@ var fullCurrentDateTime = currentDate + ' ' + currentTime;
 
 //custom key
 var viewCode = "VW" + KEY_CODE(3) + fullDate + time;
-var userCode = "USER" + KEY_CODE(3) + fullDate + time;
 
 //constant
 var freeUserImage = "https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png"

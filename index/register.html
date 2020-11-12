@@ -135,6 +135,51 @@
     </div>
 </div>
 
+<div class="modal fade" id="modal-google-completion-registration" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                  <h4>ADDITIONAL USER REGISTRATION DETAILS</h4> 
+                </div>
+            </div>
+            <div class="modal-body text-right">
+                <div class="input-group mb-3">
+                  <textarea class="form-control remove-resize" rows="3" id="register-address" placeholder="Complete Address"></textarea>
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-address-card"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input type="number" class="form-control" id="register-contact-number" placeholder="Contact Number">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-address-book"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" id="register-occupation" placeholder="Occupation">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-briefcase"></span>
+                    </div>
+                  </div>
+                </div>
+                
+                <br> 
+                <button type="button" data-dismiss="modal" class="btn btn-success text-center text-white" id="modal-register-btn">
+                  <i class="fa fa-check-circle"></i> Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- JS -->
 <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
 <script src="../plugins/jquery/jquery.min.js"></script>
