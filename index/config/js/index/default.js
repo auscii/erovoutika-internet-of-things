@@ -16,13 +16,14 @@ var viewCode = "VW" + KEY_CODE(3) + fullDate + time;
 var freeUserImage = "https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png"
 var admin = "Admin";
 var member = "Regular member";
+var panesViews = "Pane/Views/";
+var users = "Users/";
 
 //fb provider
 var provider = new firebase.auth.GoogleAuthProvider();
 
 //fb preference
-var panesViews = "Pane/Views/";
-var usersRef = firebase.database().ref("Users/");
+var usersRef = firebase.database().ref(users);
 var panesRef = firebase.database().ref(panesViews);
 
 //local data

@@ -60,7 +60,7 @@ function AUTH_GOOGLE_ACCOUNT() {
           var googleUserOccupation = $("#register-occupation").val().trim();
           var googleUserKey = googleUserEmailAddress.replace(/[^a-zA-Z ]/g,'').trim();
 
-          database.ref('Users/' + googleUserKey).set({
+          database.ref(users + googleUserKey).set({
               user_key: googleUserKey,
               user_id: googleUserId,
               user_full_name: googleUserFullName,
@@ -94,7 +94,7 @@ function AUTH_USER_ACCOUNT() {
   $('#modal-progress').modal('show');
   $('#loading-message').html('Getting user details...');
 
-  if (userLoginEmailAddress == "") {
+  if (!userLoginEmailAddress || !userLoginPassword) {
       $('#modal-progress').modal('hide');
       $('#modal-login-error').modal('show');
       $('#error-message').html("User not found!");
@@ -171,7 +171,7 @@ function NEW_ACCOUNT() {
   } else {
       firebase.auth().createUserWithEmailAndPassword(registerEmailAddress, registerPassword).then(function(user) {
           var user = firebase.auth().currentUser;
-          database.ref('Users/' + registerUserKey).set({
+          database.ref(users + registerUserKey).set({
               user_key: registerUserKey,
               user_id: user.uid,
               user_full_name: registerFullname,

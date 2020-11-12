@@ -82,7 +82,7 @@ $(".hover").mouseleave(
 
 //for creating temp user
 /*
-database.ref('Users/' + "juangmailcom").set({
+database.ref(users + "juangmailcom").set({
 	user_key: "juangmailcom",
 	user_id: userCode,
 	user_full_name: "Juan dela cruz",
