@@ -18,6 +18,14 @@ var admin = "Admin";
 var member = "Regular member";
 var panesViews = "Pane/Views/";
 var users = "Users/";
+var sub = "/";
+var counter = 0;
+
+//continous value
+var viewId = setInterval(function() {
+	counter += 1;
+	viewId = viewCode + counter;
+}, 1000);
 
 //fb provider
 var provider = new firebase.auth.GoogleAuthProvider();
@@ -29,16 +37,13 @@ var panesRef = firebase.database().ref(panesViews);
 //local data
 var currentUserEmailAddress = localStorage.getItem('user_email_address');
 var currentUserId = localStorage.getItem('user_id');
-var currentUser_key = localStorage.getItem('user_key');
+var currentUserKey = localStorage.getItem('user_key');
 var currentUserFullname = localStorage.getItem('user_full_name');
 var currentUserProfilePicture = localStorage.getItem('user_icon_url');
 var currentUserPosition = localStorage.getItem('user_position');
 var currentUserStatus = localStorage.getItem('user_status');
 var currentUserDateRegistered = localStorage.getItem('user_date_registered');
 var currentUserTimeRegistered = localStorage.getItem('user_time_registered');
-
-console.log("currentDate =>", currentDate);
-console.log("currentTime =>", currentTime);
 
 //methods
 function KEY_CODE(len, charSet) {

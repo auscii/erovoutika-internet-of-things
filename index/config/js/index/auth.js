@@ -106,9 +106,7 @@ function AUTH_USER_ACCOUNT() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user != null) {
           var user = firebase.auth().currentUser;
-          usersRef.orderByChild("user_key")
-                  .on("child_added",
-          function(data) {
+          usersRef.orderByChild("user_key").on("child_added", function(data) {
              var userId = data.val().user_id;
              var userKey = data.val().user_key;
              var userFullName = data.val().user_full_name;
@@ -118,16 +116,18 @@ function AUTH_USER_ACCOUNT() {
              var p = data.val().user_password;
              var userStatus = data.val().user_status;
 
-             localStorage.setItem('user_id', userId);
-             localStorage.setItem('user_key', userKey);
-             localStorage.setItem('user_full_name', userFullName);
-             localStorage.setItem('user_icon_url', userIconUrl);
-             localStorage.setItem('user_position', userPosition);
-             localStorage.setItem('user_email_address', userEmailAddress);
-             localStorage.setItem('p', p);
-             localStorage.setItem('user_status', userStatus);
-             localStorage.setItem('user_date_registered', fullDate);
-             localStorage.setItem('user_time_registered', time);
+             if (userLoginEmailAddress == userEmailAddress) {
+                localStorage.setItem('user_id', userId);
+                localStorage.setItem('user_key', userKey);
+                localStorage.setItem('user_full_name', userFullName);
+                localStorage.setItem('user_icon_url', userIconUrl);
+                localStorage.setItem('user_position', userPosition);
+                localStorage.setItem('user_email_address', userEmailAddress);
+                localStorage.setItem('p', p);
+                localStorage.setItem('user_status', userStatus);
+                localStorage.setItem('user_date_registered', fullDate);
+                localStorage.setItem('user_time_registered', time);
+             }
 
              window.location.href='index/main.html';
           });
