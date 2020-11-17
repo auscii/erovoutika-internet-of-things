@@ -44,7 +44,7 @@ function POPULATE_DASHBOARD(id) {
 function NEW_CARD(input) {
 	var selectedId = input.value;
 	$('#modal-add-card').modal('show');
-    $("#modal-big-text").html(selectedId);
+    //$("#modal-big-text").html(selectedId);
 }
 
 //pane views effects
