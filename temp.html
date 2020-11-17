@@ -1,4 +1,4 @@
-<div class="cards flex justify-center m-top-10 cards-container"><div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container"><button class="card-button" type="button" id="btn-add-view"><i class="fa fa-plus"></i> </button></div></div>
+<div class="cards flex justify-center m-top-10 cards-container"><div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container"><button id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'"><i class="fa fa-plus"></i></button><span id="display-title-label" style="font-weight: lighter; font-size: 21px;"></span><span id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;"></span><span id="display-units-label" style="margin-top: -27px; margin-left: 40px;"></span></div></div><input type="hidden" value="'+id+'">
 
 
 
@@ -6,10 +6,15 @@
 
 
 <div class="cards flex justify-center m-top-10 cards-container">
-	<div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container">
-	    <button class="card-button" type="button" id="btn-add-view"><i class="fa fa-plus"></i> </button>
-	</div>
-</div>
+            <div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container">
+              <button id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'">
+                <i class="fa fa-plus"></i></button>
+              <span id="display-title-label" style="font-weight: lighter; font-size: 21px;"></span>
+              <span id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;"></span>
+              <span id="display-units-label" style="margin-top: -27px; margin-left: 40px;"></span>
+            </div>
+          </div>
+          <input type="hidden" value="'+id+'">
 
 
 
@@ -31,3 +36,23 @@
      <a href="#" class="follow">'+paneButtonValue+'</a>
 	</figcaption> 
 	</figure> -->
+
+
+
+
+
+
+
+
+
+		<!-- COMMENTS -->
+		//populate pane view(s) depending on the current user logged in
+		database.ref(users + currentUserKey).on('child_added', function(data) {
+			var id = data.val().pane_view_id;
+			var myVar;
+			listOfIds.push(id);
+			if (id) {
+				//POPULATE_DASHBOARD(id, data.numChildren());
+				myVar = setInterval(alertFunc, 3000);
+			}
+		});

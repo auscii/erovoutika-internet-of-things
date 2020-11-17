@@ -20,6 +20,7 @@ var panesViews = "Pane/Views/";
 var users = "Users/";
 var sub = "/";
 var counter = 0;
+var selectedId = "";
 
 //continous value
 var viewId = setInterval(function() {
