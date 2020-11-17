@@ -20,9 +20,11 @@ var panesViews = "Pane/Views/";
 var userInformation = "USER INFORMATION/";
 var users = "USERS/";
 var data = "DATA/";
+var widgets = "WIDGETS/";
 var sub = "/";
 var counter = 0;
 var selectedId = "";
+var isDashboardNoData = false;
 
 //continous value
 var viewId = setInterval(function() {

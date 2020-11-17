@@ -5,7 +5,7 @@ $("#btn-add-pane").click(function() {
 });
 
 $("#btn-submit-pane").click(function() {
-  	database.ref(users + currentUserKey + sub + viewId).set({
+  	database.ref(users + currentUserKey + sub + widgets + viewId).set({
        pane_view_id: viewId,
        pane_view_sort_order: 0
     });
@@ -24,7 +24,7 @@ $("#btn-submit-card").click(function() {
 	var animateValueChanges = $('#widget-animate-value-changes').val();
 	var units = $('#widget-units').val();
 
-  	database.ref(users + currentUserKey + sub + selectedId).set({
+  	database.ref(users + currentUserKey + sub + widgets + selectedId).set({
        pane_view_id: selectedId,
        pane_view_type: type,
        pane_view_title: title,
@@ -52,7 +52,7 @@ $('select[id=widget-type], select[id=widget-edit-type]').on('change', function (
 });
 
 $("#btn-submit-delete-widget").click(function() {
-	database.ref(users + currentUserKey + sub + selectedId).remove();
+	database.ref(users + currentUserKey + sub + widgets + selectedId).remove();
     $("#modal-delete-card").modal("hide");
     $("#modal-success").modal("show");
     $("#modal-success-message").html("Successfully deleted!");
@@ -69,17 +69,22 @@ function DASBOARD_VIEWS() {
 	} else {
 		$("#user-img").attr("src", currentUserProfilePicture);
 		$('#user-fullname').html(currentUserFullname);
-		database.ref(users + currentUserKey).on('child_added', function(data) {
+		database.ref(users + currentUserKey + sub + widgets).on('child_added', function(data) {
 			var id = data.val().pane_view_id;
 			if (id) {
 				POPULATE_DASHBOARD(id);
+				isDashboardNoData = true;
 			}
 		});
+
+		setTimeout(function() {
+			CHECK_IF_DATA_EXISTS();
+		}, 5000);
 	}
 }
 
 function POPULATE_DASHBOARD(id) {
-	database.ref(users + currentUserKey).on('child_added', function(data) {
+	database.ref(users + currentUserKey + sub + widgets).on('child_added', function(data) {
 		var viewId = data.val().pane_view_id;
 		var type = data.val().pane_view_type;
 		var title = data.val().pane_view_title;
@@ -117,7 +122,7 @@ function EDIT_CARD(input) {
 	$('#edit-card-modal').modal('show');
  	$('.modal-edit-widget-header').html('Edit widget card');
 
-	database.ref(users + currentUserKey).on('child_added', function(data) {
+	database.ref(users + currentUserKey + sub + widgets).on('child_added', function(data) {
 		var viewId = data.val().pane_view_id;
 		var type = data.val().pane_view_type;
 		var title = data.val().pane_view_title;
@@ -158,7 +163,7 @@ function EDIT_CARD(input) {
 		var getAnimateValueChanges = $('#widget-edit-animate-value-changes').val();
 		var getUnits = $('#widget-edit-units').val();
 
-		database.ref(users + currentUserKey + sub + selectedId).update({
+		database.ref(users + currentUserKey + sub + widgets + selectedId).update({
 	       pane_view_id: selectedId,
 	       pane_view_type: getType,
 	       pane_view_title: getTitle,
@@ -171,7 +176,6 @@ function EDIT_CARD(input) {
 		});
 
 		$('#edit-card-modal').modal('hide');
-
 		RELOAD_PAGE();
 	});
 }
@@ -190,6 +194,20 @@ function VIEW_INPUTS(value) {
 	$('#widget-include-sparkline-label').css({"display":value}); 
 	$('#widget-animate-value-changes-label').css({"display":value}); 
 	$('#widget-units-label').css({"display":value}); 
+}
+
+function CHECK_IF_DATA_EXISTS() {
+	var start = setInterval( function() {
+		if (isDashboardNoData) {
+	  		clearInterval(start);
+			return;
+		} else {
+			$('#spinner').css({"display":"none"}); 
+			$('#modal-invalid').modal('show');
+			$('#modal-invalid-message').html('No available data');
+			isDashboardNoData = true;
+		}
+	}, 1000);
 }
 
 $(".hover").mouseleave(
