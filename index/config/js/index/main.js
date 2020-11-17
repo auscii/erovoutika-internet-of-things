@@ -55,7 +55,7 @@ $("#btn-submit-delete-widget").click(function() {
 	database.ref(users + currentUserKey + sub + selectedId).remove();
     $("#modal-delete-card").modal("hide");
     $("#modal-success").modal("show");
-    $("#modal-success-message").html("Successfully delete card!");
+    $("#modal-success-message").html("Successfully deleted!");
 });
 
 $("#btn-close-success-pane").click(function() {
@@ -96,7 +96,7 @@ function POPULATE_DASHBOARD(id) {
 	 			units = "";
 	 		}
 			$('#spinner').css({"display":"none"}); 
-			$("#pane-views").append('<div class="cards flex justify-center m-top-10 cards-container"><div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container"><button id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'"><i class="fa fa-plus-circle"></i></button><button style="margin-left: 60px; margin-top: -80px;" id="btn-edit-card" class="card-button" data-toggle="modal" data-target="#edit-card-modal" onclick="EDIT_CARD(this)" value="'+id+'"><i class="fa fa-edit"></i></button><button id="btn-delete-card" class="card-button" data-toggle="modal" data-target="#modal-delete-card" onclick="DELETE_CARD(this)" value="'+id+'" style="margin-left: 140px; margin-top: -80px;"><i class="fa fa-trash"></i></button><span id="display-title-label" style="font-weight: lighter; font-size: 21px;">'+title+'</span><span id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;">'+value+'</span><span id="display-units-label">'+units+'</span></div></div>');
+			$("#pane-views").append('<div class="cards flex justify-center m-top-10 cards-container"><div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container"><button title="Add new card widget" id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'"><i class="fa fa-plus-circle"></i></button><button title="Edit card widget" style="margin-left: 60px; margin-top: -80px;" id="btn-edit-card" class="card-button" data-toggle="modal" data-target="#edit-card-modal" onclick="EDIT_CARD(this)" value="'+id+'"><i class="fa fa-edit"></i></button><button title="Delete card widget" id="btn-delete-card" class="card-button" data-toggle="modal" data-target="#modal-delete-card" onclick="DELETE_CARD(this)" value="'+id+'" style="margin-left: 140px; margin-top: -80px;"><i class="fa fa-trash"></i></button><span title="Title" id="display-title-label" style="font-weight: lighter; font-size: 21px;">'+title+'</span><span title="Value" id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;">'+value+'</span><span title="Units" id="display-units-label">'+units+'</span></div></div>');
 		}
 	});
 }

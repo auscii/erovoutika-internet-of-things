@@ -81,6 +81,12 @@
 	text-align: left;
 }
 
+.modal-center-title {
+	font-weight: bold; 
+	font-size: 20px; 
+	text-align: center;
+}
+
 .left {
 	float: left;
 }
