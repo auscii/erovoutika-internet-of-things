@@ -60,7 +60,7 @@ function AUTH_GOOGLE_ACCOUNT() {
           var googleUserOccupation = $("#register-occupation").val().trim();
           var googleUserKey = googleUserEmailAddress.replace(/[^a-zA-Z ]/g,'').trim();
 
-          database.ref(users + googleUserKey).set({
+          database.ref(users + googleUserKey + sub + userInformation).set({
               user_key: googleUserKey,
               user_id: googleUserId,
               user_full_name: googleUserFullName,
@@ -98,7 +98,6 @@ function AUTH_USER_ACCOUNT() {
       $('#modal-progress').modal('hide');
       $('#modal-login-error').modal('show');
       $('#error-message').html("User not found!");
-      console.log("userLoginEmailAddress is empty");
       return;
   }
 
@@ -106,30 +105,33 @@ function AUTH_USER_ACCOUNT() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user != null) {
           var user = firebase.auth().currentUser;
-          usersRef.orderByChild("user_key").on("child_added", function(data) {
-             var userId = data.val().user_id;
-             var userKey = data.val().user_key;
-             var userFullName = data.val().user_full_name;
-             var userIconUrl = data.val().user_icon_url;
-             var userPosition = data.val().user_position;
-             var userEmailAddress = data.val().user_email_address;
-             var p = data.val().user_password;
-             var userStatus = data.val().user_status;
+          
+          database.ref(users).on('child_added', function(snapshot) {
+             firebase.database().ref(users + snapshot.key).orderByChild("user_key").on("child_added", function(data) {
+                var userId = data.val().user_id;
+                var userKey = data.val().user_key;
+                var userFullName = data.val().user_full_name;
+                var userIconUrl = data.val().user_icon_url;
+                var userPosition = data.val().user_position;
+                var userEmailAddress = data.val().user_email_address;
+                var p = data.val().user_password;
+                var userStatus = data.val().user_status;
 
-             if (userLoginEmailAddress == userEmailAddress) {
-                localStorage.setItem('user_id', userId);
-                localStorage.setItem('user_key', userKey);
-                localStorage.setItem('user_full_name', userFullName);
-                localStorage.setItem('user_icon_url', userIconUrl);
-                localStorage.setItem('user_position', userPosition);
-                localStorage.setItem('user_email_address', userEmailAddress);
-                localStorage.setItem('p', p);
-                localStorage.setItem('user_status', userStatus);
-                localStorage.setItem('user_date_registered', fullDate);
-                localStorage.setItem('user_time_registered', time);
-             }
+                if (userLoginEmailAddress == userEmailAddress) {
+                   localStorage.setItem('user_id', userId);
+                   localStorage.setItem('user_key', userKey);
+                   localStorage.setItem('user_full_name', userFullName);
+                   localStorage.setItem('user_icon_url', userIconUrl);
+                   localStorage.setItem('user_position', userPosition);
+                   localStorage.setItem('user_email_address', userEmailAddress);
+                   localStorage.setItem('p', p);
+                   localStorage.setItem('user_status', userStatus);
+                   localStorage.setItem('user_date_registered', fullDate);
+                   localStorage.setItem('user_time_registered', time);
 
-             window.location.href='index/main.html';
+                   window.location.href='index/main.html';
+                }
+            });
           });
         } else {
           $('#modal-progress').modal('hide');
@@ -162,16 +164,17 @@ function NEW_ACCOUNT() {
   if (registerPassword != registerReTypePassword) {
       $('#modal-register').modal('show');
       $('#modal-register-message').html('Password Mismatched! Please confirm your Password.');
-      console.log("-> Password Mismatched!");
   } else if (!registerEmailAddress || !registerPassword || !registerFullname || 
              !registerAddress || !registerContactNumber || !registerOccupation) {
-      console.log("-> registration fill up fields!");
       $('#modal-register').modal('show');
       $('#modal-register-message').html('Please fill-up all input fields!');
   } else {
+      $('#modal-progress').modal('show');
+      $('#loading-message').html('Saving user account...');
       firebase.auth().createUserWithEmailAndPassword(registerEmailAddress, registerPassword).then(function(user) {
           var user = firebase.auth().currentUser;
-          database.ref(users + registerUserKey).set({
+
+          database.ref(users + registerUserKey + sub + userInformation).set({
               user_key: registerUserKey,
               user_id: user.uid,
               user_full_name: registerFullname,
@@ -186,14 +189,18 @@ function NEW_ACCOUNT() {
               user_date_logged_in_date: currentDate,
               user_date_logged_in_time: currentTime
           });
+
+          INSERT_DEFAULT_USER_DATA(registerUserKey);
+
+          $('#modal-progress').modal('hide');
           $('#modal-register').modal('show');
           $('#modal-register-message').html('Successfully register new account!');
           $('#modal-register-btn').html('OK');
           $('#modal-register-btn').css({"background-color":"#008a07"});
+
           $("#modal-register-btn").click(function() {
-            window.location.href="../index.html";
+             window.location.href="../index.html";
           });
-          console.log("-> registration success!");
       }, function(error) {
           $('#modal-register').modal('show');
           $('#modal-register-message').html(error.code + ": " + error.message);

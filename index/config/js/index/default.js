@@ -17,7 +17,9 @@ var freeUserImage = "https://toppng.com/uploads/preview/roger-berry-avatar-place
 var admin = "Admin";
 var member = "Regular member";
 var panesViews = "Pane/Views/";
-var users = "Users/";
+var userInformation = "USER INFORMATION/";
+var users = "USERS/";
+var data = "DATA/";
 var sub = "/";
 var counter = 0;
 var selectedId = "";
@@ -32,8 +34,7 @@ var viewId = setInterval(function() {
 var provider = new firebase.auth.GoogleAuthProvider();
 
 //fb preference
-var usersRef = firebase.database().ref(users);
-var panesRef = firebase.database().ref(panesViews);
+//var usersRef = firebase.database().ref(users);
 
 //local data
 var currentUserEmailAddress = localStorage.getItem('user_email_address');
@@ -59,4 +60,29 @@ function KEY_CODE(len, charSet) {
 
 function RELOAD_PAGE() {
 	location.reload();
+}
+
+function INSERT_DEFAULT_USER_DATA(key) {
+    database.ref(users + key + sub + data).set({
+        AC001: 0,
+        AC002: 0,
+        AC003: 0,
+        AC004: 0,
+        AC005: 0,
+        AM001: 0,
+        AM002: 0,
+        AM003: 0,
+        AM004: 0,
+        AM005: 0,
+        DC001: 0,
+        DC002: 0,
+        DC003: 0,
+        DC004: 0,
+        DC005: 0,
+        DM001: 0,
+        DM002: 0,
+        DM003: 0,
+        DM004: 0,
+        DM005: 0
+    });
 }
