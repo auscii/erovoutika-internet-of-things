@@ -74,7 +74,7 @@
 	height: 80px;
 }
 
-.modal-add-widget-header {
+.modal-add-widget-header, .modal-edit-widget-header, .modal-invalid-message {
 	font-weight: bold; 
 	text-transform: uppercase; 
 	font-size: 20px; 
