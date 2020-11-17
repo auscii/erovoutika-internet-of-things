@@ -207,12 +207,28 @@
       </div>
   </div>
 
+  <div class="modal fade" id="modal-delete-card" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <div class="modal-title modal-header-title">
+                    <h4>Do you wish to delete this widget?</h4> 
+                  </div>
+              </div>
+              <div class="modal-body text-center">
+                  <button type="button" id="btn-submit-delete-widget" class="btn btn-success text-center"><i class="fa fa-check-circle"></i> Yes</button>&nbsp;
+                  <button type="button" data-dismiss="modal" class="btn btn-danger text-center"><i class="fa fa-times-circle"></i> No</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
   <div class="modal fade" id="modal-success" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
               <div class="modal-header">
                   <div class="modal-title modal-header-title">
-                    <h4><i class="fa fa-check-circle"></i> Successfully added new pane!</h4> 
+                    <h4><i class="fa fa-check-circle"></i> <span id="modal-success-message"></span></h4> 
                   </div>
               </div>
               <div class="modal-body text-center">

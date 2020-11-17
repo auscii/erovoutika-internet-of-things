@@ -15,7 +15,7 @@ $("#btn-submit-pane").click(function() {
 $("#btn-submit-card").click(function() {
 	$('#pane-views').css({"display":"none"}); 
     $("#modal-add-widget").modal("hide");
-	
+
 	var type = $('#widget-type').val();
 	var title = $('#widget-title').val();
 	var size = $('#widget-size').val();
@@ -48,6 +48,17 @@ $('select[id=widget-type]').on('change', function (e) {
 	} else {
 		alert("Not available");
 	}
+});
+
+$("#btn-submit-delete-widget").click(function() {
+	database.ref(users + currentUserKey + sub + selectedId).remove();
+    $("#modal-delete-card").modal("hide");
+    $("#modal-success").modal("show");
+    $("#modal-success-message").html("Successfully delete card!");
+});
+
+$("#btn-close-success-pane").click(function() {
+    RELOAD_PAGE();
 });
 
 function DASBOARD_VIEWS() {
@@ -84,7 +95,7 @@ function POPULATE_DASHBOARD(id) {
 	 			units = "";
 	 		}
 			$('#spinner').css({"display":"none"}); 
-			$("#pane-views").append('<div class="cards flex justify-center m-top-10 cards-container"><div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container"><button id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'"><i class="fa fa-plus"></i></button><span id="display-title-label" style="font-weight: lighter; font-size: 21px;">'+title+'</span><span id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;">'+value+'</span><span id="display-units-label" style="margin-top: -27px; margin-left: 40px;">'+units+'</span></div></div>');
+			$("#pane-views").append('<div class="cards flex justify-center m-top-10 cards-container"><div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container"><button id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'"><i class="fa fa-plus"></i></button><button id="btn-delete-card" class="card-button" data-toggle="modal" data-target="#modal-delete-card" onclick="DELETE_CARD(this)" value="'+id+'" style="margin-left: 130px; margin-top: -80px;"><i class="fa fa-trash"></i></button><span id="display-title-label" style="font-weight: lighter; font-size: 21px;">'+title+'</span><span id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;">'+value+'</span><span id="display-units-label" style="margin-top: -27px; margin-left: 40px;">'+units+'</span></div></div>');
 		}
 	});
 }
@@ -93,7 +104,10 @@ function NEW_CARD(input) {
 	VIEW_INPUTS("none");
 	$('#modal-add-widget').modal('show');
  	selectedId = input.value;
- 	console.log("inputValue =>", input.value);
+}
+
+function DELETE_CARD(input) {
+ 	selectedId = input.value;
 }
 
 function VIEW_INPUTS(value) {
