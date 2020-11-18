@@ -90,3 +90,20 @@
 .left {
 	float: left;
 }
+
+.about-image {
+	height: 250px;
+	width: 250px;
+	float: left;
+	margin-left: 25rem;
+	margin-top: 5rem;
+	border-radius: 120px;
+}
+
+.about-description{
+	text-align: justify;
+	float: right;
+	width: 500px;
+	margin-left: 50rem;
+	margin-top: -12rem;
+}

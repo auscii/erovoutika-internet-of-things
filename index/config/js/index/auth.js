@@ -29,8 +29,6 @@ function LOGIN_GOOGLE_ACCOUNT() {
     firebase.auth().signInWithPopup(provider).then(function(result) {
       var token = result.credential.accessToken;
       var user = result.user;
-      console.log("-> token =>", token);
-      console.log("-> user =>", user);
       AUTH_GOOGLE_ACCOUNT();
     }).catch(function(error) {
         var errorCode = error.code;
@@ -49,17 +47,13 @@ function AUTH_GOOGLE_ACCOUNT() {
       var googleUserEmailAddress = user.email;
       var googleUserFullName = user.displayName;
       var googleUserProfilePicture = user.photoURL;
-
       firebase.auth().sendPasswordResetEmail(googleUserEmailAddress);
-
       $('#modal-google-completion-registration').modal('show');
-
       $('#btn_complete_google_sign_in').click(function() {
           var googleUserAddress = $("#register-address").val().trim();
           var googleUserContactNumber = $("#register-contact-number").val().trim();
           var googleUserOccupation = $("#register-occupation").val().trim();
           var googleUserKey = googleUserEmailAddress.replace(/[^a-zA-Z ]/g,'').trim();
-
           database.ref(users + googleUserKey + sub + userInformation).set({
               user_key: googleUserKey,
               user_id: googleUserId,
@@ -76,7 +70,6 @@ function AUTH_GOOGLE_ACCOUNT() {
               user_date_logged_in_time: currentTime
           });
       });
-
     }); 
 }
 
@@ -90,22 +83,18 @@ function USER_LOG_OUT() {
 function AUTH_USER_ACCOUNT() {
   var userLoginEmailAddress = $("#user-email-address").val();
   var userLoginPassword = $("#user-password").val();
-
   $('#modal-progress').modal('show');
   $('#loading-message').html('Getting user details...');
-
   if (!userLoginEmailAddress || !userLoginPassword) {
       $('#modal-progress').modal('hide');
       $('#modal-login-error').modal('show');
       $('#error-message').html("User not found!");
       return;
   }
-
   firebase.auth().signInWithEmailAndPassword(userLoginEmailAddress, userLoginPassword).then(function(firebaseUser) {
     firebase.auth().onAuthStateChanged((user) => {
       if (user != null) {
           var user = firebase.auth().currentUser;
-          
           database.ref(users).on('child_added', function(snapshot) {
              firebase.database().ref(users + snapshot.key).orderByChild("user_key").on("child_added", function(data) {
                 var userId = data.val().user_id;
@@ -116,7 +105,9 @@ function AUTH_USER_ACCOUNT() {
                 var userEmailAddress = data.val().user_email_address;
                 var p = data.val().user_password;
                 var userStatus = data.val().user_status;
-
+                var userAddress = data.val().user_address;
+                var userContactNumber = data.val().user_contact_number;
+                var userOccupation = data.val().user_occupation;
                 if (userLoginEmailAddress == userEmailAddress) {
                    localStorage.setItem('user_id', userId);
                    localStorage.setItem('user_key', userKey);
@@ -128,7 +119,9 @@ function AUTH_USER_ACCOUNT() {
                    localStorage.setItem('user_status', userStatus);
                    localStorage.setItem('user_date_registered', fullDate);
                    localStorage.setItem('user_time_registered', time);
-
+                   localStorage.setItem('user_address', userAddress);
+                   localStorage.setItem('user_contact_number', userContactNumber);
+                   localStorage.setItem('user_occupation', userOccupation);
                    window.location.href='index/main.html';
                 }
             });
@@ -157,10 +150,8 @@ function NEW_ACCOUNT() {
   var registerContactNumber = $("#register-contact-number").val().trim();
   var registerOccupation = $("#register-occupation").val().trim();
   var registerUserKey = registerEmailAddress.replace(/[^a-zA-Z ]/g,'').trim();
-
   $('#modal-register-btn').html('Close');
   $('#modal-register-btn').css({"background-color":"#eb4034"});
-
   if (registerPassword != registerReTypePassword) {
       $('#modal-register').modal('show');
       $('#modal-register-message').html('Password Mismatched! Please confirm your Password.');
@@ -173,7 +164,6 @@ function NEW_ACCOUNT() {
       $('#loading-message').html('Saving user account...');
       firebase.auth().createUserWithEmailAndPassword(registerEmailAddress, registerPassword).then(function(user) {
           var user = firebase.auth().currentUser;
-
           database.ref(users + registerUserKey + sub + userInformation).set({
               user_key: registerUserKey,
               user_id: user.uid,
@@ -189,15 +179,12 @@ function NEW_ACCOUNT() {
               user_date_logged_in_date: currentDate,
               user_date_logged_in_time: currentTime
           });
-
           INSERT_DEFAULT_USER_DATA(registerUserKey);
-
           $('#modal-progress').modal('hide');
           $('#modal-register').modal('show');
           $('#modal-register-message').html('Successfully register new account!');
           $('#modal-register-btn').html('OK');
           $('#modal-register-btn').css({"background-color":"#008a07"});
-
           $("#modal-register-btn").click(function() {
              window.location.href="../index.html";
           });

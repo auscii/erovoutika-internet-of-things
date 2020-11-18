@@ -48,6 +48,9 @@ var currentUserPosition = localStorage.getItem('user_position');
 var currentUserStatus = localStorage.getItem('user_status');
 var currentUserDateRegistered = localStorage.getItem('user_date_registered');
 var currentUserTimeRegistered = localStorage.getItem('user_time_registered');
+var currentUserAddress = localStorage.getItem('user_address');
+var currentUserContactNumber = localStorage.getItem('user_contact_number');
+var currentUserOccupation = localStorage.getItem('user_occupation');
 
 //methods
 function KEY_CODE(len, charSet) {
@@ -87,4 +90,15 @@ function INSERT_DEFAULT_USER_DATA(key) {
         DM004: 0,
         DM005: 0
     });
+}
+
+function SET_USER_PROFILE() {
+    $("#img-profile-picture").attr("src", currentUserProfilePicture);
+    $("#profile-user-fullname").html(currentUserFullname);
+    $("#profile-user-position").html(currentUserPosition);
+    $("#profile-user-id").html(currentUserId);
+    $("#profile-user-address").html(currentUserAddress);
+    $("#profile-user-contact-number").html(currentUserContactNumber);
+    $("#profile-user-email-address").html(currentUserEmailAddress);
+    $("#profile-user-occupation").html(currentUserOccupation);
 }

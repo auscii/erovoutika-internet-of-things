@@ -1,4 +1,5 @@
 DASBOARD_VIEWS();
+SET_USER_PROFILE();
 
 $("#btn-add-pane").click(function() {
     $('#modal-pane').modal('show');
@@ -15,7 +16,6 @@ $("#btn-submit-pane").click(function() {
 $("#btn-submit-card").click(function() {
 	$('#pane-views').css({"display":"none"}); 
     $("#modal-add-widget").modal("hide");
-
 	var type = $('#widget-type').val();
 	var title = $('#widget-title').val();
 	var size = $('#widget-size').val();
@@ -23,7 +23,6 @@ $("#btn-submit-card").click(function() {
 	var includeSparkline = $('#widget-include-sparkline').val();
 	var animateValueChanges = $('#widget-animate-value-changes').val();
 	var units = $('#widget-units').val();
-
   	database.ref(users + currentUserKey + sub + widgets + selectedId).set({
        pane_view_id: selectedId,
        pane_view_type: type,
@@ -35,7 +34,6 @@ $("#btn-submit-card").click(function() {
        pane_view_units: units,
        pane_view_sort_order: 1
     });
-
     DASBOARD_VIEWS();
     RELOAD_PAGE();
 });
@@ -76,7 +74,6 @@ function DASBOARD_VIEWS() {
 				isDashboardNoData = true;
 			}
 		});
-
 		setTimeout(function() {
 			CHECK_IF_DATA_EXISTS();
 		}, 5000);
@@ -93,7 +90,6 @@ function POPULATE_DASHBOARD(id) {
 		var includeSparkline = data.val().pane_view_include_sparkline;
 		var animateValueChanges = data.val().pane_view_animate_value_changes;
 		var units = data.val().pane_view_units;
-
 		if (id == viewId) {
 	 		if (title == undefined || value == undefined || units == undefined) {
 	 			title = "";
@@ -120,10 +116,8 @@ function DELETE_CARD(input) {
 function EDIT_CARD(input) {
 	POPULATE_VALUES();
  	selectedId = input.value;
-
 	$('#edit-card-modal').modal('show');
  	$('.modal-edit-widget-header').html('Edit widget card');
-
 	database.ref(users + currentUserKey + sub + widgets).on('child_added', function(data) {
 		var viewId = data.val().pane_view_id;
 		var type = data.val().pane_view_type;
@@ -133,7 +127,6 @@ function EDIT_CARD(input) {
 		var includeSparkline = data.val().pane_view_include_sparkline;
 		var animateValueChanges = data.val().pane_view_animate_value_changes;
 		var units = data.val().pane_view_units;
-
 		if (selectedId == viewId) {
  			$('#widget-edit-type').val(type);
 			$('#widget-edit-title').val(title);
@@ -164,7 +157,6 @@ function EDIT_CARD(input) {
 		var getIncludeSparkline = $('#widget-edit-include-sparkline').val();
 		var getAnimateValueChanges = $('#widget-edit-animate-value-changes').val();
 		var getUnits = $('#widget-edit-units').val();
-
 		database.ref(users + currentUserKey + sub + widgets + selectedId).update({
 	       pane_view_id: selectedId,
 	       pane_view_type: getType,
@@ -176,7 +168,6 @@ function EDIT_CARD(input) {
 	       pane_view_units: getUnits,
 	       pane_view_sort_order: 1
 		});
-
 		$('#edit-card-modal').modal('hide');
 		RELOAD_PAGE();
 	});
