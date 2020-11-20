@@ -54,6 +54,9 @@ $("#btn-submit-delete-widget").click(function() {
     $("#modal-delete-card").modal("hide");
     $("#modal-success").modal("show");
     $("#modal-success-message").html("Successfully deleted!");
+
+	console.log('CLICKED SUBMIT WIDGET BTN');
+	//CHECK_REMOVED_CARD();
 });
 
 $("#btn-close-success-pane").click(function() {
@@ -65,41 +68,58 @@ function DASBOARD_VIEWS() {
 	if (!currentUserId) {
 		window.location.href="../index.html";
 	} else {
-		$("#user-img").attr("src", currentUserProfilePicture);
-		$('#user-fullname').html(currentUserFullname);
 		database.ref(users + currentUserKey + sub + widgets).on('child_added', function(data) {
 			var id = data.val().pane_view_id;
 			if (id) {
-				POPULATE_DASHBOARD(id);
-				isDashboardNoData = true;
+				console.log('FETCH child_added');
+				POPULATE_DASHBOARD(data.val().pane_view_id, data.val().pane_view_title, data.val().pane_view_value, data.val().pane_view_units, 1);
 			}
+		});
+		database.ref(users + currentUserKey + sub + widgets).on('child_changed', function(data) {
+			var id = data.val().pane_view_id;
+			if (id) {
+				console.log('FETCH child_changed');
+				POPULATE_DASHBOARD(data.val().pane_view_id, data.val().pane_view_title, data.val().pane_view_value, data.val().pane_view_units, 2);
+			}
+		});
+		database.ref(users + currentUserKey + sub + widgets).on('child_removed', function(data) {
+			console.log('FETCH child_removed');
 		});
 		setTimeout(function() {
 			CHECK_IF_DATA_EXISTS();
 		}, 5000);
+
 	}
 }
 
-function POPULATE_DASHBOARD(id) {
-	database.ref(users + currentUserKey + sub + widgets).on('child_added', function(data) {
-		var viewId = data.val().pane_view_id;
-		var type = data.val().pane_view_type;
-		var title = data.val().pane_view_title;
-		var size = data.val().pane_view_size;
-		var value = data.val().pane_view_value;
-		var includeSparkline = data.val().pane_view_include_sparkline;
-		var animateValueChanges = data.val().pane_view_animate_value_changes;
-		var units = data.val().pane_view_units;
-		if (id == viewId) {
-	 		if (title == undefined || value == undefined || units == undefined) {
-	 			title = "";
-	 			value = "";
-	 			units = "";
-	 		}
-			$('#spinner').css({"display":"none"}); 
-			$("#pane-views").append('<div class="cards flex justify-center m-top-10 cards-container"><div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container"><button title="Add new card widget" id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'"><i class="fa fa-plus-circle"></i></button><button title="Edit card widget" style="margin-left: 60px; margin-top: -80px;" id="btn-edit-card" class="card-button" data-toggle="modal" data-target="#edit-card-modal" onclick="EDIT_CARD(this)" value="'+id+'"><i class="fa fa-edit"></i></button><button title="Delete card widget" id="btn-delete-card" class="card-button" data-toggle="modal" data-target="#modal-delete-card" onclick="DELETE_CARD(this)" value="'+id+'" style="margin-left: 140px; margin-top: -80px;"><i class="fa fa-trash"></i></button><span title="Title" id="display-title-label" style="font-weight: lighter; font-size: 21px;">'+title+'</span><span title="Value" id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;">'+value+'</span><span title="Units" id="display-units-label">'+units+'</span></div></div>');
-		}
+function CHECK_REMOVED_CARD() {
+	console.log('selectedId ->', selectedId);
+
+	listIds.forEach(function(e) {
+	    console.log("listIds ->", e);
+
+	    if (selectedId == e) {
+	    	$("#pane-views").remove();
+	    }
 	});
+}
+
+function POPULATE_DASHBOARD(id, title, value, units, status) {
+	if (title == undefined || value == undefined || units == undefined) {
+		title = "";
+		value = "";
+		units = "";
+	}
+	isDashboardNoData = true;
+	listIds.push(viewId);
+	$('#spinner').css({"display":"none"}); 
+
+	// if (status == 2) {
+	// 	$("#pane-views #"+id).remove();
+	// 	console.log('POPULATE_DASHBOARD REMOVED PREV VIEW');
+	// }
+	$("#pane-views").append('<div class="cards flex justify-center m-top-10 cards-container"><div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container"><button title="Add new card widget" id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'"><i class="fa fa-plus-circle"></i></button><button title="Edit card widget" style="margin-left: 60px; margin-top: -80px;" id="btn-edit-card" class="card-button" data-toggle="modal" data-target="#edit-card-modal" onclick="EDIT_CARD(this)" value="'+id+'"><i class="fa fa-edit"></i></button><button title="Delete card widget" id="btn-delete-card" class="card-button" data-toggle="modal" data-target="#modal-delete-card" onclick="DELETE_CARD(this)" value="'+id+'" style="margin-left: 140px; margin-top: -80px;"><i class="fa fa-trash"></i></button><span title="Title" id="display-title-label" style="font-weight: lighter; font-size: 21px;">'+title+'</span><span title="Value" id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;">'+value+'</span><span title="Units" id="display-units-label">'+units+'</span></div></div>');
+	console.log('POPULATE_DASHBOARD_TRUE');
 }
 
 function NEW_CARD(input) {
@@ -147,6 +167,8 @@ function EDIT_CARD(input) {
 			}
 		}
 		*/
+
+		//$("#pane-views").append('<div class="cards flex justify-center m-top-10 cards-container"><div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container"><button title="Add new card widget" id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'"><i class="fa fa-plus-circle"></i></button><button title="Edit card widget" style="margin-left: 60px; margin-top: -80px;" id="btn-edit-card" class="card-button" data-toggle="modal" data-target="#edit-card-modal" onclick="EDIT_CARD(this)" value="'+id+'"><i class="fa fa-edit"></i></button><button title="Delete card widget" id="btn-delete-card" class="card-button" data-toggle="modal" data-target="#modal-delete-card" onclick="DELETE_CARD(this)" value="'+id+'" style="margin-left: 140px; margin-top: -80px;"><i class="fa fa-trash"></i></button><span title="Title" id="display-title-label" style="font-weight: lighter; font-size: 21px;">'+title+'</span><span title="Value" id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;">'+value+'</span><span title="Units" id="display-units-label">'+units+'</span></div></div>');
 	});
 
 	$("#btn-edit-submit-card").click(function() {
@@ -169,8 +191,11 @@ function EDIT_CARD(input) {
 	       pane_view_sort_order: 1
 		});
 		$('#edit-card-modal').modal('hide');
-		RELOAD_PAGE();
+		//RELOAD_PAGE();
+
+
 	});
+
 }
 
 function VIEW_INPUTS(value) {

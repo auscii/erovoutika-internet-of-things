@@ -1,0 +1,161 @@
+{
+  "USERS" : {
+    "kevinevaristogmailcom" : {
+      "DATA" : {
+        "AC001" : 0,
+        "AC002" : 0,
+        "AC003" : 0,
+        "AC004" : 0,
+        "AC005" : 0,
+        "AM001" : 0,
+        "AM002" : 0,
+        "AM003" : 0,
+        "AM004" : 0,
+        "AM005" : 0,
+        "DC001" : 0,
+        "DC002" : 0,
+        "DC003" : 0,
+        "DC004" : 0,
+        "DC005" : 0,
+        "DM001" : 0,
+        "DM002" : 0,
+        "DM003" : 0,
+        "DM004" : 0,
+        "DM005" : 0
+      },
+      "USER INFORMATION" : {
+        "user_address" : "Pasig Makati City",
+        "user_contact_number" : "0912312321",
+        "user_date_logged_in_date" : "2020-11-18",
+        "user_date_logged_in_time" : "04:40:46 ",
+        "user_email_address" : "kevin_evaristo@gmail.com",
+        "user_full_name" : "Kevin Evaristo",
+        "user_icon_url" : "https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png",
+        "user_id" : "eWxlVDMaLbS1UV8gGhR8id1R4uI3",
+        "user_key" : "kevinevaristogmailcom",
+        "user_occupation" : "President",
+        "user_password" : "123qwe",
+        "user_position" : "Regular member",
+        "user_status" : 1
+      }
+    },
+    "lsnstonecoldgmailcom" : {
+      "DATA" : {
+        "AC001" : 0,
+        "AC002" : 0,
+        "AC003" : 0,
+        "AC004" : 0,
+        "AC005" : 0,
+        "AM001" : 0,
+        "AM002" : 0,
+        "AM003" : 0,
+        "AM004" : 0,
+        "AM005" : 0,
+        "DC001" : 0,
+        "DC002" : 0,
+        "DC003" : 0,
+        "DC004" : 0,
+        "DC005" : 0,
+        "DM001" : 0,
+        "DM002" : 0,
+        "DM003" : 0,
+        "DM004" : 0,
+        "DM005" : 0
+      },
+      "USER INFORMATION" : {
+        "user_address" : "3515 Ilaya St. Makati Pasig City, Philippines",
+        "user_contact_number" : "09166860971",
+        "user_date_logged_in_date" : "2020-11-18",
+        "user_date_logged_in_time" : "04:45:17 ",
+        "user_email_address" : "lsn.stonecold@gmail.com",
+        "user_full_name" : "Sean Narvasa",
+        "user_icon_url" : "https://toppng.com/uploads/preview/roger-berry-avatar-placeholder-11562991561rbrfzlng6h.png",
+        "user_id" : "JGSNfEEoJsSb6cXeRjW7ZnnPHrO2",
+        "user_key" : "lsnstonecoldgmailcom",
+        "user_occupation" : "Developer",
+        "user_password" : "123qwe",
+        "user_position" : "Regular member",
+        "user_status" : 1
+      },
+      "WIDGETS" : {
+        "VWHQG11182020913" : {
+          "pane_view_animate_value_changes" : "Yes",
+          "pane_view_id" : "VWHQG11182020913",
+          "pane_view_include_sparkline" : "Yes",
+          "pane_view_size" : "Big",
+          "pane_view_sort_order" : 1,
+          "pane_view_title" : "TEST123",
+          "pane_view_type" : "Text",
+          "pane_view_units" : "11111111",
+          "pane_view_value" : "0"
+        },
+        "VWLYU1118202013015" : {
+          "pane_view_animate_value_changes" : "Yes",
+          "pane_view_id" : "VWLYU1118202013015",
+          "pane_view_include_sparkline" : "Yes",
+          "pane_view_size" : "Regular",
+          "pane_view_sort_order" : 1,
+          "pane_view_title" : "AxAxA",
+          "pane_view_type" : "Text",
+          "pane_view_units" : "11",
+          "pane_view_value" : "0"
+        },
+        "VWPVP111820201710" : {
+          "pane_view_animate_value_changes" : "No",
+          "pane_view_id" : "VWPVP111820201710",
+          "pane_view_include_sparkline" : "No",
+          "pane_view_size" : "Big",
+          "pane_view_sort_order" : 1,
+          "pane_view_title" : "Total sales",
+          "pane_view_type" : "Text",
+          "pane_view_units" : "1010101",
+          "pane_view_value" : "111"
+        },
+        "VWQL1111820208013" : {
+          "pane_view_animate_value_changes" : "No",
+          "pane_view_id" : "VWQL1111820208013",
+          "pane_view_include_sparkline" : "No",
+          "pane_view_size" : "Big",
+          "pane_view_sort_order" : 1,
+          "pane_view_title" : "QQQQQ",
+          "pane_view_type" : "Text",
+          "pane_view_units" : "111111",
+          "pane_view_value" : "0"
+        },
+        "VWUCM11182020215" : {
+          "pane_view_animate_value_changes" : "No",
+          "pane_view_id" : "VWUCM11182020215",
+          "pane_view_include_sparkline" : "No",
+          "pane_view_size" : "Regular",
+          "pane_view_sort_order" : 1,
+          "pane_view_title" : "Total Stats",
+          "pane_view_type" : "Text",
+          "pane_view_units" : "666",
+          "pane_view_value" : "555"
+        },
+        "VWUFP111820201092" : {
+          "pane_view_animate_value_changes" : "No",
+          "pane_view_id" : "VWUFP111820201092",
+          "pane_view_include_sparkline" : "No",
+          "pane_view_size" : "Big",
+          "pane_view_sort_order" : 1,
+          "pane_view_title" : "TRX",
+          "pane_view_type" : "Text",
+          "pane_view_units" : "2323232",
+          "pane_view_value" : "0"
+        },
+        "VWZ0U11182020498" : {
+          "pane_view_animate_value_changes" : "No",
+          "pane_view_id" : "VWZ0U11182020498",
+          "pane_view_include_sparkline" : "No",
+          "pane_view_size" : "Big",
+          "pane_view_sort_order" : 1,
+          "pane_view_title" : "Total Expenses",
+          "pane_view_type" : "Text",
+          "pane_view_units" : "33333",
+          "pane_view_value" : "2222"
+        }
+      }
+    }
+  }
+}

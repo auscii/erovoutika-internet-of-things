@@ -25,6 +25,7 @@ var sub = "/";
 var counter = 0;
 var selectedId = "";
 var isDashboardNoData = false;
+var listIds = [];
 
 //continous value
 var viewId = setInterval(function() {
@@ -101,4 +102,6 @@ function SET_USER_PROFILE() {
     $("#profile-user-contact-number").html(currentUserContactNumber);
     $("#profile-user-email-address").html(currentUserEmailAddress);
     $("#profile-user-occupation").html(currentUserOccupation);
+    $("#user-img").attr("src", currentUserProfilePicture);
+    $('#user-fullname').html(currentUserFullname);
 }
