@@ -1,6 +1,12 @@
 DASBOARD_VIEWS();
 SET_USER_PROFILE();
 
+$(".hover").mouseleave(
+	function () {
+		$(this).removeClass("hover");
+	}
+);
+
 $("#btn-add-pane").click(function() {
     $('#modal-pane').modal('show');
 });
@@ -68,36 +74,19 @@ function DASBOARD_VIEWS() {
 	if (!currentUserId) {
 		window.location.href="../index.html";
 	} else {
-		database.ref(users + currentUserKey + sub + widgets).on('child_added', function(data) {
-			var id = data.val().pane_view_id;
-			if (id) {
-				console.log('FETCH child_added');
-				POPULATE_DASHBOARD(data.val().pane_view_id, data.val().pane_view_title, data.val().pane_view_value, data.val().pane_view_units, 1);
-			}
-		});
-		database.ref(users + currentUserKey + sub + widgets).on('child_changed', function(data) {
-			var id = data.val().pane_view_id;
-			if (id) {
-				console.log('FETCH child_changed');
-				POPULATE_DASHBOARD(data.val().pane_view_id, data.val().pane_view_title, data.val().pane_view_value, data.val().pane_view_units, 2);
-			}
-		});
-		database.ref(users + currentUserKey + sub + widgets).on('child_removed', function(data) {
-			console.log('FETCH child_removed');
-		});
+		FETCH_DATA();
 		setTimeout(function() {
+			console.log('DASBOARD_VIEWS TO CHECK_IF_DATA_EXISTS');
 			CHECK_IF_DATA_EXISTS();
-		}, 5000);
-
+		// }, 5000);
+		}, 1000);
 	}
 }
 
 function CHECK_REMOVED_CARD() {
 	console.log('selectedId ->', selectedId);
-
 	listIds.forEach(function(e) {
 	    console.log("listIds ->", e);
-
 	    if (selectedId == e) {
 	    	$("#pane-views").remove();
 	    }
@@ -112,14 +101,28 @@ function POPULATE_DASHBOARD(id, title, value, units, status) {
 	}
 	isDashboardNoData = true;
 	listIds.push(viewId);
+
 	$('#spinner').css({"display":"none"}); 
 
-	// if (status == 2) {
-	// 	$("#pane-views #"+id).remove();
-	// 	console.log('POPULATE_DASHBOARD REMOVED PREV VIEW');
-	// }
-	$("#pane-views").append('<div class="cards flex justify-center m-top-10 cards-container"><div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container"><button title="Add new card widget" id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'"><i class="fa fa-plus-circle"></i></button><button title="Edit card widget" style="margin-left: 60px; margin-top: -80px;" id="btn-edit-card" class="card-button" data-toggle="modal" data-target="#edit-card-modal" onclick="EDIT_CARD(this)" value="'+id+'"><i class="fa fa-edit"></i></button><button title="Delete card widget" id="btn-delete-card" class="card-button" data-toggle="modal" data-target="#modal-delete-card" onclick="DELETE_CARD(this)" value="'+id+'" style="margin-left: 140px; margin-top: -80px;"><i class="fa fa-trash"></i></button><span title="Title" id="display-title-label" style="font-weight: lighter; font-size: 21px;">'+title+'</span><span title="Value" id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;">'+value+'</span><span title="Units" id="display-units-label">'+units+'</span></div></div>');
-	console.log('POPULATE_DASHBOARD_TRUE');
+	if (status == 2) {
+		// console.log('id ->', id);
+		// console.log('selectedId ->', selectedId);
+		console.log('EDITED TITLE VALUE ->', title);
+
+		if (id == selectedId) {
+			// $("#pane-views").remove();
+			$('#widget-title').html(title);
+		}
+
+		console.log('POPULATE_DASHBOARD_UPDATE_DATA');
+	} else {
+
+		$("#pane-views").append('<tr><td>'+id+'</td><td><span id="widget-title">'+title+'</span></td><td>'+value+'</td><td>'+units+'</td><td><button title="Edit card widget" id="btn-edit-card" class="card-button" data-toggle="modal" data-target="#edit-card-modal" onclick="EDIT_CARD(this)" value="'+id+'"><i class="fa fa-edit"></i></button></td></tr>');
+
+		//$("#pane-views").append('<div class="cards flex justify-center m-top-10 cards-container"><div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container"><button title="Add new card widget" id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'"><i class="fa fa-plus-circle"></i></button><button title="Edit card widget" style="margin-left: 60px; margin-top: -80px;" id="btn-edit-card" class="card-button" data-toggle="modal" data-target="#edit-card-modal" onclick="EDIT_CARD(this)" value="'+id+'"><i class="fa fa-edit"></i></button><button title="Delete card widget" id="btn-delete-card" class="card-button" data-toggle="modal" data-target="#modal-delete-card" onclick="DELETE_CARD(this)" value="'+id+'" style="margin-left: 140px; margin-top: -80px;"><i class="fa fa-trash"></i></button><span title="Title" id="display-title-label" style="font-weight: lighter; font-size: 21px;">'+title+'</span><span title="Value" id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;">'+value+'</span><span title="Units" id="display-units-label">'+units+'</span></div></div>');
+	
+		//console.log('POPULATE_DASHBOARD_ADD_DATA');
+	}
 }
 
 function NEW_CARD(input) {
@@ -216,8 +219,9 @@ function VIEW_INPUTS(value) {
 
 function CHECK_IF_DATA_EXISTS() {
 	var start = setInterval( function() {
+		//console.log('-> CHECK_IF_DATA_EXISTS');
 		if (isDashboardNoData) {
-	  		clearInterval(start);
+	  		//clearInterval(start);
 			return;
 		} else {
 			$('#spinner').css({"display":"none"}); 
@@ -262,11 +266,25 @@ function POPULATE_VALUES() {
 	});
 }
 
-$(".hover").mouseleave(
-	function () {
-		$(this).removeClass("hover");
-	}
-);
+function FETCH_DATA() {
+	database.ref(users + currentUserKey + sub + widgets).on('child_added', function(data) {
+		var id = data.val().pane_view_id;
+		if (id) {
+			console.log('FETCH child_added');
+			POPULATE_DASHBOARD(data.val().pane_view_id, data.val().pane_view_title, data.val().pane_view_value, data.val().pane_view_units, 1);
+		}
+	});
+	database.ref(users + currentUserKey + sub + widgets).on('child_changed', function(data) {
+		var id = data.val().pane_view_id;
+		if (id) {
+			console.log('FETCH child_changed');
+			POPULATE_DASHBOARD(data.val().pane_view_id, data.val().pane_view_title, data.val().pane_view_value, data.val().pane_view_units, 2);
+		}
+	});
+	database.ref(users + currentUserKey + sub + widgets).on('child_removed', function(data) {
+		console.log('FETCH child_removed');
+	});
+}
 
 const swappable = new Draggable.Sortable(document.querySelectorAll('.cards'), {
   draggable: '.card'

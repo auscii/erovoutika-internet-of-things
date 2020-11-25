@@ -1,4 +1,39 @@
-<div class="cards flex justify-center m-top-10 cards-container"><div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container"><button id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'"><i class="fa fa-plus"></i></button><span id="display-title-label" style="font-weight: lighter; font-size: 21px;"></span><span id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;"></span><span id="display-units-label" style="margin-top: -27px; margin-left: 40px;"></span></div></div><input type="hidden" value="'+id+'">
+<tr><td>'+id+'</td><td>'+title+'</td><td>'+value+'</td><td>'+units+'</td></tr>
+
+
+
+
+
+
+
+<button title="Add new card widget" id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'"><i class="fa fa-plus-circle"></i></button>
+
+<button title="Edit card widget" style="margin-left: 60px; margin-top: -80px;" id="btn-edit-card" class="card-button" data-toggle="modal" data-target="#edit-card-modal" onclick="EDIT_CARD(this)" value="'+id+'">
+	<i class="fa fa-edit"></i></button>
+
+<button title="Delete card widget" id="btn-delete-card" class="card-button" data-toggle="modal" data-target="#modal-delete-card" onclick="DELETE_CARD(this)" value="'+id+'" style="margin-left: 140px; margin-top: -80px;"><i class="fa fa-trash"></i></button>
+
+<span title="Title" id="display-title-label" style="font-weight: lighter; font-size: 21px;">'+title+'</span>
+
+<span title="Value" id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;">'+value+'</span>
+
+<span title="Units" id="display-units-label">'+units+'</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6,53 +41,20 @@
 
 
 <div class="cards flex justify-center m-top-10 cards-container">
-            <div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container">
-              <button id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'">
-                <i class="fa fa-plus"></i></button>
-              <span id="display-title-label" style="font-weight: lighter; font-size: 21px;"></span>
-              <span id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;"></span>
-              <span id="display-units-label" style="margin-top: -27px; margin-left: 40px;"></span>
-            </div>
-          </div>
-          <input type="hidden" value="'+id+'">
+	<div class="card bg-white border shadow rounded p-4 w-1/4" id="cards-sub-container">
 
+		<button title="Add new card widget" id="btn-add-new-card" class="card-button" data-toggle="modal" data-target="#add-new-modal" onclick="NEW_CARD(this)" value="'+id+'"><i class="fa fa-plus-circle"></i></button>
 
+		<button title="Edit card widget" style="margin-left: 60px; margin-top: -80px;" id="btn-edit-card" class="card-button" data-toggle="modal" data-target="#edit-card-modal" onclick="EDIT_CARD(this)" value="'+id+'">
+			<i class="fa fa-edit"></i></button>
 
+		<button title="Delete card widget" id="btn-delete-card" class="card-button" data-toggle="modal" data-target="#modal-delete-card" onclick="DELETE_CARD(this)" value="'+id+'" style="margin-left: 140px; margin-top: -80px;"><i class="fa fa-trash"></i></button>
 
+		<span title="Title" id="display-title-label" style="font-weight: lighter; font-size: 21px;">'+title+'</span>
 
+		<span title="Value" id="display-value-label" style="margin-top: -5px; font-size: 20px; font-weight: bolder;">'+value+'</span>
 
+		<span title="Units" id="display-units-label">'+units+'</span>
 
-
-<!-- <figure class="snip1336"><figcaption><div class="card-tools" style="margin-left: -15px;"><button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button></div> <br><h2>'+panePrimaryTitle+'</h2><p>'+panelLabelCaption+'</p><a href="#" class="follow">'+paneButtonValue+'</a></figcaption></figure> -->
-
-
-<!-- <figure class="snip1336">
-	<figcaption>
-	   <div class="card-tools" style="margin-left: -15px;">
-	     <button type="button" class="btn btn-tool"><i class="fas fa-plus"></i></button>
-	   </div> <br>
-     <h2>'+panePrimaryTitle+'</h2>
-     <p>'+panelLabelCaption+'</p>
-     <a href="#" class="follow">'+paneButtonValue+'</a>
-	</figcaption> 
-	</figure> -->
-
-
-
-
-
-
-
-
-
-		<!-- COMMENTS -->
-		//populate pane view(s) depending on the current user logged in
-		database.ref(users + currentUserKey).on('child_added', function(data) {
-			var id = data.val().pane_view_id;
-			var myVar;
-			listOfIds.push(id);
-			if (id) {
-				//POPULATE_DASHBOARD(id, data.numChildren());
-				myVar = setInterval(alertFunc, 3000);
-			}
-		});
+	</div>
+</div>
